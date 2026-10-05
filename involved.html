@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Get Involved — Kids Health Shelf</title>
+  <meta name="description" content="Join Kids Health Shelf as an author, illustrator or exec, buy a sticker, or donate to print more books." />
+  <meta name="theme-color" content="#FFE14D" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23FFE14D' stroke='%2314161A' stroke-width='6'/%3E%3Cpath d='M58 40 L74 44 L58 49 Z' fill='%23FFA23A'/%3E%3Ccircle cx='52' cy='40' r='4' fill='%2314161A'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gochi+Hand&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js");
+      try { if (sessionStorage.getItem("khs-nav")) d.classList.add("is-arriving"); } catch (e) {}
+      var calm = false;
+      try { calm = matchMedia("(prefers-reduced-motion: reduce)").matches && localStorage.getItem("khs-motion") !== "on"; } catch (e) {}
+      try { if (localStorage.getItem("khs-motion") === "off") calm = true; } catch (e) {}
+      if (calm) d.classList.add("calm");
+      setTimeout(function () { if (!window.gsap) d.classList.remove("is-arriving"); }, 3500);
+    })();
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="nav">
+    <a class="logo" href="index.html" aria-label="Kids Health Shelf home">
+      <span class="logo__badge" data-sticker="goose"></span>
+      <span class="logo__text"><span class="logo__name">Kids Health Shelf</span><span class="logo__sub">WESTERN UNIVERSITY</span></span>
+    </a>
+    <nav class="nav__links" aria-label="Main">
+      <a class="nav__link" href="books.html">Books</a>
+      <a class="nav__link" href="index.html#mission">Mission</a>
+      <a class="nav__link" href="team.html">Team</a>
+      <a class="nav__link" href="involved.html" aria-current="page">Get involved</a>
+      <a class="btn btn--ink nav__cta" href="involved.html#donate">Support us</a>
+    </nav>
+    <div class="nav__tools">
+      <button class="sound-btn" type="button" aria-label="Toggle sound effects" aria-pressed="true" data-cursor="sound">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+      </button>
+      <button class="sound-btn motion-btn" type="button" aria-label="Toggle animations" aria-pressed="true" data-cursor="motion">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4z" fill="currentColor"/><path class="on" d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8zM5 15.5l.6 1.4 1.4.6-1.4.6L5 19.5l-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+      </button>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="menu" aria-label="Mobile menu">
+    <a href="books.html">Books</a>
+    <a href="index.html#mission">Mission</a>
+    <a href="team.html">Team</a>
+    <a href="involved.html">Get involved</a>
+    <a href="involved.html#donate">Support us</a>
+    <span class="menu__foot">@kids.health.shelf · Western University</span>
+  </div>
+
+  <main id="main">
+    <section class="page-head grid-paper">
+      <div class="wrap">
+        <span class="kicker" data-reveal>Get involved</span>
+        <h1 class="display h-xl" data-split="chars">Pick up a pencil.</h1>
+        <p class="lede" data-reveal>Write a story, draw the pictures, run the club, sell some stickers, or chip in for the next print run. There's a spot on the shelf for you.</p>
+      </div>
+      <span class="sticker hide-sm head-pencil" data-sticker="pencil" style="width:220px;height:56px;right:8%;top:220px"></span>
+      <span class="sticker hide-sm" data-sticker="star" data-pop data-delay=".15" style="width:70px;height:70px;right:24%;top:330px"></span>
+    </section>
+
+    <section class="section involved" id="roles">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="hiring-tag" data-pop>we're HIRING</span>
+          <h2 class="display h-lg" data-split="lines">Open roles</h2>
+          <p class="lede" style="color:var(--ink);max-width:620px;margin:0" data-reveal>Deadlines change each term, so the current application forms always live on our Linktree. No experience needed, just enthusiasm.</p>
+        </div>
+        <div class="tickets">
+          <article class="ticket" data-rot="-1.5">
+            <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+            <div class="ticket__top"><span class="chip" style="background:var(--sage)">ROLLING</span><span class="mono" style="font-size:13px">No. 01</span></div>
+            <h3>Authors</h3>
+            <p>Pitch and write a picture book about health, feelings, identity or belonging. You'll work with an editor along the way.</p>
+            <div class="ticket__perf"></div>
+            <div class="ticket__foot"><span class="hand" style="font-size:22px">✎ writers</span><a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">Apply <svg viewBox="0 0 18 18"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </article>
+          <article class="ticket" data-rot="1">
+            <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+            <div class="ticket__top"><span class="chip" style="background:var(--sage)">ROLLING</span><span class="mono" style="font-size:13px">No. 02</span></div>
+            <h3>Illustrators</h3>
+            <p>Bring a story to life page by page. Digital, paint, pencil crayons: every style is welcome on the shelf.</p>
+            <div class="ticket__perf"></div>
+            <div class="ticket__foot"><span class="hand" style="font-size:22px">✿ artists</span><a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">Apply <svg viewBox="0 0 18 18"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </article>
+          <article class="ticket" data-rot="-0.5">
+            <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+            <div class="ticket__top"><span class="chip">EACH TERM</span><span class="mono" style="font-size:13px">No. 03</span></div>
+            <h3>Directors</h3>
+            <p>Lead a team of writers or artists and help guide books from first draft to the printer.</p>
+            <div class="ticket__perf"></div>
+            <div class="ticket__foot"><span class="hand" style="font-size:22px">★ leaders</span><a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">Apply <svg viewBox="0 0 18 18"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </article>
+          <article class="ticket" data-rot="1.5">
+            <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+            <div class="ticket__top"><span class="chip">EACH TERM</span><span class="mono" style="font-size:13px">No. 04</span></div>
+            <h3>VP Communications</h3>
+            <p>Be the voice of the club: emails, partners, and the schools and libraries who want our books.</p>
+            <div class="ticket__perf"></div>
+            <div class="ticket__foot"><span class="hand" style="font-size:22px">✉ talkers</span><a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">Apply <svg viewBox="0 0 18 18"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </article>
+          <article class="ticket" data-rot="-1">
+            <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+            <div class="ticket__top"><span class="chip">EACH TERM</span><span class="mono" style="font-size:13px">No. 05</span></div>
+            <h3>VP Finance</h3>
+            <p>Keep the sticker money, donations and printing budget in order so more books reach more kids.</p>
+            <div class="ticket__perf"></div>
+            <div class="ticket__foot"><span class="hand" style="font-size:22px">$ counters</span><a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">Apply <svg viewBox="0 0 18 18"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </article>
+          <article class="ticket" data-rot="0.5">
+            <span class="ticket__notch ticket__notch--l"></span><span class="ticket__notch ticket__notch--r"></span>
+            <div class="ticket__top"><span class="chip">EACH TERM</span><span class="mono" style="font-size:13px">No. 06</span></div>
+            <h3>VP Media</h3>
+            <p>Run our Instagram, design posts like the ones that inspired this site, and show off the books.</p>
+            <div class="ticket__perf"></div>
+            <div class="ticket__foot"><span class="hand" style="font-size:22px">◎ makers</span><a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">Apply <svg viewBox="0 0 18 18"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stickers">
+      <div class="wrap sale-grid">
+        <div style="display:flex;flex-direction:column;gap:22px;max-width:520px">
+          <h2 class="sale-title"><b style="font-size:clamp(56px,7vw,96px)">STICKER</b><span class="hand" style="font-size:clamp(48px,6vw,80px)">sale</span></h2>
+          <p class="lede" data-reveal>Our stickers are $2 each and every one helps print another book. We set up a table on campus a few times a year; watch our Instagram for the next one.</p>
+          <div style="display:flex;align-items:center;gap:20px" data-reveal>
+            <span class="price" data-cursor="spin!">$2</span>
+            <span class="hand" style="font-size:26px;color:var(--blue)">peel a sticker off the sheet<br />and stick it anywhere!</span>
+          </div>
+        </div>
+        <div class="sheet" data-reveal>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="goose" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="apple" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="bee" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="daisy" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="ladybug" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="burst" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="star" data-cursor="peel me"></span></div>
+          <div class="sheet__slot"><span class="sticker peel" data-sticker="heart" data-cursor="peel me"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="donate" style="padding-top:0">
+      <div class="wrap cta-band donate-band" data-reveal>
+        <div style="max-width:620px">
+          <span class="hand" style="font-size:30px;color:var(--yellow)">give us an extra hand</span>
+          <h2 class="display h-md">Support us!</h2>
+          <p style="margin:14px 0 0;color:#e6ecff">Donating to our GoFundMe lets us print more books for elementary schools and libraries. The link lives on our Linktree.</p>
+        </div>
+        <a class="btn btn--yellow donate-btn" href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener" data-cursor="thank you!">Donate on GoFundMe
+          <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="padding-top:0">
+      <div class="wrap">
+        <div class="section__head">
+          <span class="kicker" data-reveal>Questions</span>
+          <h2 class="display h-lg" data-split="lines">Good questions</h2>
+        </div>
+        <div class="faq">
+          <div class="faq__item">
+            <button class="faq__q" type="button" aria-expanded="false">Do I need writing or art experience?<span class="faq__icon" aria-hidden="true">+</span></button>
+            <div class="faq__a"><p>Nope. If you care about kids and stories, there's a role for you. Editors and directors help newer writers and illustrators along the way.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" type="button" aria-expanded="false">Who can join?<span class="faq__icon" aria-hidden="true">+</span></button>
+            <div class="faq__a"><p>Kids Health Shelf is a Western University student club. Check our Linktree for each term's applications and who they're open to.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" type="button" aria-expanded="false">Where do the books go?<span class="faq__icon" aria-hidden="true">+</span></button>
+            <div class="faq__a"><p>Donations and sticker sales help us print copies for elementary schools and libraries, so kids can find them where they already read.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__q" type="button" aria-expanded="false">I'm a teacher or librarian. Can I get in touch?<span class="faq__icon" aria-hidden="true">+</span></button>
+            <div class="faq__a"><p>Please do! Send us a DM on Instagram at @kids.health.shelf and our communications team will get back to you.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__note">
+        <span class="hand">psst, the goose wants to hear from you.</span>
+        <p>DM us on Instagram, or find every form, application and donation link on our Linktree.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <span class="kicker">Explore</span>
+          <a href="books.html">The Shelf</a>
+          <a href="index.html#mission">Our mission</a>
+          <a href="team.html">Meet the team</a>
+          <a href="involved.html">Get involved</a>
+        </div>
+        <div class="footer__col">
+          <span class="kicker">Follow</span>
+          <a href="https://www.instagram.com/kids.health.shelf/" target="_blank" rel="noopener">@kids.health.shelf</a>
+          <a href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener">linktr.ee/kids.health.shelf</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__goose" data-sticker="goose" data-honk data-eyes data-cursor="honk!"></div>
+    <span class="wordmark" aria-hidden="true">Kids Health Shelf</span>
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Kids Health Shelf · a student club at Western University</span>
+      <span>made with crayons &amp; code</span>
+    </div>
+  </footer>
+
+  <div class="curtain" aria-hidden="true">
+    <div class="curtain__goose" data-sticker="goose"></div>
+    <span class="curtain__word">turning the page…</span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Draggable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/InertiaPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Physics2DPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+  <script src="assets/js/stickers.js"></script>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/involved.js"></script>
+</body>
+</html>
