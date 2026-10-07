@@ -1,0 +1,11 @@
+name = "khs-checkout"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+SITE_URL = "https://kidshealthshelf.org"
+# Local origins are only here so the shop can be tested on a laptop; remove them if you like.
+ALLOWED_ORIGINS = "https://kidshealthshelf.org,https://www.kidshealthshelf.org,http://127.0.0.1:5517,http://localhost:5517"
+
+# STRIPE_SECRET_KEY is a secret, never put it in this file:
+#   npx wrangler secret put STRIPE_SECRET_KEY

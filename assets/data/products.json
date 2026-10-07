@@ -1,0 +1,17 @@
+{
+  "checkoutUrl": "",
+  "currency": "cad",
+  "delivery": {
+    "pickup": { "label": "Pick up on campus", "price": 0 },
+    "mail": { "label": "Mail it (Canada)", "price": 200 }
+  },
+  "products": [
+    { "id": "goose", "name": "Honk the Goose", "price": 300, "art": "goose", "bg": "yellow", "spec": "3 in · glossy vinyl", "tags": ["critters"], "badge": "Bestseller" },
+    { "id": "daisy", "name": "Daisy Days", "price": 300, "art": "daisy", "bg": "sky", "spec": "3 in · glossy vinyl", "tags": ["garden"] },
+    { "id": "bee", "name": "Busy Bee", "price": 300, "art": "bee", "bg": "sage", "spec": "3 in · glossy vinyl", "tags": ["critters"] },
+    { "id": "ladybug", "name": "Lucky Ladybug", "price": 300, "art": "ladybug", "bg": "pink", "spec": "3 in · glossy vinyl", "tags": ["critters"], "badge": "New" },
+    { "id": "tree", "name": "Rambutan Tree", "price": 400, "art": "tree", "bg": "wash", "spec": "4 in · matte paper", "tags": ["books"], "badge": "From book 0001" },
+    { "id": "apple", "name": "Apple a Day", "price": 300, "art": "apple", "bg": "yellow", "spec": "3 in · glossy vinyl", "tags": ["garden"] },
+    { "id": "pack", "name": "The Whole Shelf Pack", "price": 1500, "art": "pack", "bg": "blue", "spec": "all six stickers + a thank-you note", "tags": ["packs"], "pack": true }
+  ]
+}

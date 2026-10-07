@@ -7,14 +7,18 @@
   const R = KHS.REDUCED;
   const rand = gsap.utils.random;
 
+  /* pdf: drop the file in assets/books/ and put its path here, e.g.
+     "assets/books/rambutan-tree.pdf". Leave it "" and the button stays hidden. */
   const BOOKS = {
     rambutan: {
+      pdf: "",
       num: "KHS BOOK 0001", title: "The Girl Under the Rambutan Tree", by: "by Nadith Ranasinghe",
       blurb: "A young girl with big dreams learns to embrace her uniqueness despite not fitting in. A heartfelt story about resilience, self-worth, and finding strength in who you are.",
       facts: [["Themes", "resilience, self-worth"], ["Made by", "Western students"]],
       cover: "cover--sage", art: "tree", cta: ["See it on Instagram", "https://www.instagram.com/kids.health.shelf/"]
     },
     nobody: {
+      pdf: "",
       num: "KHS BOOK 0002", title: "Nobody Looks Like Me!", by: "by Emily Leha",
       blurb: "A story about friendship, families, and appreciating the differences that make each of us who we are, instead of letting them get in the way of what really matters.",
       facts: [["Themes", "difference, family"], ["Made by", "Western students"]],
@@ -79,6 +83,10 @@
     cta.textContent = b.cta[0];
     cta.href = b.cta[1];
     if (/^https?:/.test(b.cta[1])) { cta.target = "_blank"; cta.rel = "noopener"; } else { cta.removeAttribute("target"); cta.removeAttribute("rel"); }
+    const pdf = field("pdf");
+    pdf.hidden = !b.pdf;
+    if (b.pdf) pdf.href = b.pdf; else pdf.removeAttribute("href");
+    cta.classList.toggle("btn--blue", !b.pdf);
     front.className = "face face--front cover " + b.cover;
     field("ctitle").textContent = b.title;
     field("cby").textContent = b.by;

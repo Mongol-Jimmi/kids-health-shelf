@@ -43,6 +43,7 @@
     return actx;
   }
   KHS.audioReady = () => !!actx && actx.state === "running" && soundOn;
+  KHS.audio = audio;
 
   KHS.honkSound = function (loud) {
     const a = audio(); if (!a) return;
@@ -123,12 +124,13 @@
   }
 
   function initSoundToggle() {
-    document.querySelectorAll(".sound-btn:not(.motion-btn)").forEach((btn) => {
+    const SOUND = ".sound-btn:not(.motion-btn):not(.draw-btn)";
+    document.querySelectorAll(SOUND).forEach((btn) => {
       btn.setAttribute("aria-pressed", String(soundOn));
       btn.addEventListener("click", () => {
         soundOn = !soundOn;
         KHS.local.set("khs-sound", soundOn ? "on" : "off");
-        document.querySelectorAll(".sound-btn:not(.motion-btn)").forEach((b) => b.setAttribute("aria-pressed", String(soundOn)));
+        document.querySelectorAll(SOUND).forEach((b) => b.setAttribute("aria-pressed", String(soundOn)));
         if (soundOn) KHS.popSound(1.2);
       });
     });
