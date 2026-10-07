@@ -7,25 +7,36 @@
   const R = KHS.REDUCED;
   const rand = gsap.utils.random;
 
-  /* pdf: drop the file in assets/books/ and put its path here, e.g.
-     "assets/books/rambutan-tree.pdf". Leave it "" and the button stays hidden. */
+  /* pdf: the book file in assets/books/ (leave "" to hide the Read button).
+     img: the real cover in assets/books/covers/ (leave "" to use the sticker cover). */
   const BOOKS = {
     rambutan: {
-      pdf: "",
+      pdf: "assets/books/rambutan-tree.pdf",
+      img: "assets/books/covers/rambutan-tree.jpg",
       num: "KHS BOOK 0001", title: "The Girl Under the Rambutan Tree", by: "by Nadith Ranasinghe",
       blurb: "A young girl with big dreams learns to embrace her uniqueness despite not fitting in. A heartfelt story about resilience, self-worth, and finding strength in who you are.",
       facts: [["Themes", "resilience, self-worth"], ["Made by", "Western students"]],
       cover: "cover--sage", art: "tree", cta: ["See it on Instagram", "https://www.instagram.com/kids.health.shelf/"]
     },
     nobody: {
-      pdf: "",
+      pdf: "assets/books/nobody-looks-like-me.pdf",
+      img: "assets/books/covers/nobody-looks-like-me.jpg",
       num: "KHS BOOK 0002", title: "Nobody Looks Like Me!", by: "by Emily Leha",
-      blurb: "A story about friendship, families, and appreciating the differences that make each of us who we are, instead of letting them get in the way of what really matters.",
-      facts: [["Themes", "difference, family"], ["Made by", "Western students"]],
+      blurb: "Amanda starts at a new school and can't find anyone who looks like her. Her science-teacher dad explains DNA, and she learns that being different is exactly what makes a new friend possible.",
+      facts: [["Themes", "friendship, genetics"], ["Pictures by", "Amy Shi & Sophie Smith"]],
       cover: "cover--yellow", art: "face", cta: ["See it on Instagram", "https://www.instagram.com/kids.health.shelf/"]
     },
+    microville: {
+      pdf: "assets/books/microville.pdf",
+      img: "assets/books/covers/microville.jpg",
+      num: "KHS BOOK 0003", title: "MicroVille", by: "by Bahareh Rahimi Shahmirzadi",
+      blurb: "Mimi doesn't like trying new foods, until her doctor tells her about MicroVille: the tiny town of microbes in her gut. Every new food welcomes a new neighbour, and the town is strongest because everyone is different.",
+      facts: [["Themes", "gut health, belonging"], ["Written & drawn by", "Bahareh Rahimi Shahmirzadi"]],
+      cover: "cover--sky", art: "apple", cta: ["See it on Instagram", "https://www.instagram.com/kids.health.shelf/"]
+    },
     soon: {
-      num: "KHS BOOK 000?", title: "This spot is saved", by: "by someone like you",
+      pdf: "", img: "",
+      num: "KHS BOOK 0004", title: "This spot is saved", by: "by someone like you",
       blurb: "The next Kids Health Shelf book hasn't been written yet. We're hiring authors and illustrators on a rolling basis, and no experience is needed.",
       facts: [["Looking for", "writers & artists"], ["Experience", "not required"]],
       cover: "cover--pink", art: "question", cta: ["See open roles", "involved.html"]
@@ -87,12 +98,16 @@
     pdf.hidden = !b.pdf;
     if (b.pdf) pdf.href = b.pdf; else pdf.removeAttribute("href");
     cta.classList.toggle("btn--blue", !b.pdf);
-    front.className = "face face--front cover " + b.cover;
+    front.className = "face face--front cover " + b.cover + (b.img ? " has-img" : "");
+    front.style.backgroundImage = b.img ? `url("${b.img}")` : "";
     field("ctitle").textContent = b.title;
     field("cby").textContent = b.by;
     field("cart").innerHTML = KHS.stickers[b.art];
     // the illustration lives on the inside of the cover, which lands on the left page
-    back.innerHTML = `<div class="open-book__art">${KHS.stickers[b.art]}</div><span class="hand">a Kids Health Shelf book</span>`;
+    back.classList.toggle("has-img", !!b.img);
+    back.innerHTML = b.img
+      ? `<img class="open-book__inside" src="${b.img.replace(".jpg", "-inside.jpg")}" alt="" loading="lazy" draggable="false">`
+      : `<div class="open-book__art">${KHS.stickers[b.art]}</div><span class="hand">a Kids Health Shelf book</span>`;
   }
 
   function openBook(id, from) {
@@ -111,7 +126,9 @@
       .fromTo(cover, { rotationY: 0 }, { rotationY: narrow ? -100 : -180, duration: 1.1, ease: "power3.inOut", transformPerspective: 2200 }, "-=0.1")
       .add(() => { if (narrow) gsap.set(cover, { autoAlpha: 0 }); })
       .from(rightBits, { autoAlpha: 0, y: 18, stagger: 0.07, duration: 0.45, ease: "power2.out" }, "-=0.45")
-      .from(back.querySelector(".open-book__art"), { scale: 0.4, rotation: -15, duration: 0.8, ease: "elastic.out(1, 0.5)" }, "-=0.6");
+      .from(back.firstElementChild, back.classList.contains("has-img")
+        ? { autoAlpha: 0, duration: 0.5 }
+        : { scale: 0.4, rotation: -15, duration: 0.8, ease: "elastic.out(1, 0.5)" }, "-=0.6");
   }
 
   function closeBook() {

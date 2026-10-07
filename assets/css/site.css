@@ -833,6 +833,14 @@ html.is-drawing .bagbar { display: none !important; }
 /* team photos: put an img tag inside .polaroid__photo (see team.html) */
 .polaroid__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* real book covers */
+.cover--img { background: var(--wash) center top / cover no-repeat; padding: 0; }
+.cover--img > * { display: none; }
+.open-book__cover .face--front.has-img { background-size: cover; background-position: center top; background-repeat: no-repeat; }
+.open-book__cover .face--front.has-img > * { visibility: hidden; }
+.open-book__cover .face--back.has-img { padding: 0; }
+.open-book__inside { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
 /* book PDFs */
 .open-book__ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; }
 .open-book__ctas .btn { padding: 14px 22px; font-size: 16px; }
