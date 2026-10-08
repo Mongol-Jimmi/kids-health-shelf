@@ -138,16 +138,24 @@
   let pts = null;
   let live = null;
   let lastMove = 0;
-  surface.addEventListener("pointerdown", (e) => {
-    if (e.button !== 0) return;
-    surface.setPointerCapture(e.pointerId);
+  let hand = { x: innerWidth / 2, y: innerHeight / 2 }; // where the pencil last was, for putting it back
+  function begin(e) {
     pts = [[round(e.clientX + scrollX), round(e.clientY + scrollY)]];
     live = makePath(pathData(pts), color, size);
     lastMove = e.timeStamp;
     lastInk = Date.now();
     scratchStart();
+  }
+  surface.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    surface.setPointerCapture(e.pointerId);
+    begin(e);
   });
   surface.addEventListener("pointermove", (e) => {
+    hand = { x: e.clientX, y: e.clientY };
+    move(e);
+  });
+  function move(e) {
     if (!pts) return;
     const events = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
     let moved = 0;
@@ -164,7 +172,7 @@
     lastMove = e.timeStamp;
     scratchSpeed(moved / dt);
     lastInk = Date.now();
-  });
+  }
   const end = () => {
     scratchStop();
     if (!pts) return;
@@ -202,6 +210,164 @@
   chip.addEventListener("click", () => wipe());
   document.body.appendChild(chip);
 
+  /* ---------------- the big pencil: pick it up and draw ----------------
+     A pencil pokes in from the right edge once you scroll. Tap it and it shrinks
+     into your pointer; press and drag it and you are already drawing. */
+  const NOTES = ["pick me up & draw!", "psst… doodle on anything!", "grab me!", "scribble on the page!"];
+  const dock = document.createElement("div");
+  dock.className = "pencil-dock";
+  dock.innerHTML =
+    '<button type="button" class="pencil-dock__pencil" aria-label="Pick up the pencil and draw on the page" data-cursor="grab me!">' +
+    '<svg viewBox="0 0 240 56" aria-hidden="true">' +
+    '<path d="M4 28 L22 22 L22 34 Z" class="pencil-dock__lead"/>' +
+    '<path d="M22 22 L58 6 H196 V50 H58 L22 34 Z" fill="#F6D7A7" stroke="#14161A" stroke-width="3.5" stroke-linejoin="round"/>' +
+    '<path d="M58 6 H196 V50 H58 C64 36 64 20 58 6 Z" fill="#FFE14D" stroke="#14161A" stroke-width="3.5" stroke-linejoin="round"/>' +
+    '<path d="M64 20 H196 M64 36 H196" stroke="#14161A" stroke-width="2" opacity=".28"/>' +
+    '<path d="M196 4 H214 V52 H196 Z" fill="#C9CED8" stroke="#14161A" stroke-width="3.5" stroke-linejoin="round"/>' +
+    '<path d="M202 4 V52 M208 4 V52" stroke="#14161A" stroke-width="2" opacity=".35"/>' +
+    '<path d="M214 4 H226 Q236 4 236 16 V40 Q236 52 226 52 H214 Z" fill="#FF8FB8" stroke="#14161A" stroke-width="3.5" stroke-linejoin="round"/>' +
+    '<path d="M4 28 L22 22 L22 34 Z" fill="none" stroke="#14161A" stroke-width="3" stroke-linejoin="round"/>' +
+    "</svg></button>" +
+    '<span class="pencil-dock__note hand" aria-hidden="true"><span class="pencil-dock__text">' + NOTES[0] + "</span>" +
+    '<svg viewBox="0 0 90 60"><path d="M6 8 C36 0 70 14 78 46"/><path d="M66 40 L78 50 L86 36"/></svg></span>';
+  document.body.appendChild(dock);
+  const pencil = dock.querySelector(".pencil-dock__pencil");
+  const note = dock.querySelector(".pencil-dock__note");
+  const noteText = dock.querySelector(".pencil-dock__text");
+  const REST = -22;
+  let docked = false;   // pencil is poking in from the edge
+  let held = false;     // pencil is "in your hand" (draw mode, pencil hidden)
+  let noteShows = 0;
+
+  // the pencil turns around its tip, so moving it by (x, y) moves the tip exactly there
+  const tipRest = () => {
+    const r = dock.getBoundingClientRect();
+    return { x: r.left + pencil.offsetLeft, y: r.top + pencil.offsetTop + pencil.offsetHeight / 2 };
+  };
+  const OUT = () => ({ x: pencil.offsetWidth + 40, rotation: REST - 8 });
+  if (gsap) gsap.set(pencil, { transformOrigin: "0% 50%", rotation: REST, ...OUT() });
+
+  function showNote(next) {
+    if (!gsap || held || !docked) return;
+    if (next) noteText.textContent = NOTES[noteShows % NOTES.length];
+    noteShows++;
+    gsap.killTweensOf(note);
+    if (R) { gsap.set(note, { autoAlpha: 1 }); gsap.delayedCall(4, () => gsap.set(note, { autoAlpha: 0 })); return; }
+    const arrow = note.querySelectorAll("path");
+    gsap.timeline()
+      .fromTo(note, { autoAlpha: 0, scale: 0.6, rotation: 6 }, { autoAlpha: 1, scale: 1, rotation: -4, duration: 0.5, ease: "back.out(2.2)" })
+      .fromTo(arrow, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.45, stagger: 0.25, ease: "power2.out" }, "<0.15")
+      .to(note, { autoAlpha: 0, y: -8, duration: 0.4 }, "+=3.6")
+      .set(note, { y: 0 });
+  }
+  function wiggle() {
+    if (!gsap || R || held || !docked) return;
+    gsap.timeline()
+      .to(pencil, { x: -26, rotation: REST - 10, duration: 0.25, ease: "power2.out" })
+      .to(pencil, { x: 0, rotation: REST, duration: 1.1, ease: "elastic.out(1.2, 0.3)" });
+  }
+  function dockIn() {
+    if (docked || held || !gsap) return;
+    docked = true;
+    dock.classList.add("is-docked");
+    if (R) gsap.set(pencil, { x: 0, rotation: REST });
+    else gsap.to(pencil, { x: 0, y: 0, scale: 1, rotation: REST, autoAlpha: 1, duration: 0.9, ease: "elastic.out(1, 0.55)", overwrite: true });
+    if (noteShows === 0) gsap.delayedCall(R ? 0 : 0.5, () => showNote(false));
+  }
+  function dockOut() {
+    if (!docked || held || !gsap) return;
+    docked = false;
+    dock.classList.remove("is-docked");
+    gsap.killTweensOf(note);
+    gsap.set(note, { autoAlpha: 0 });
+    if (R) gsap.set(pencil, OUT());
+    else gsap.to(pencil, { ...OUT(), duration: 0.4, ease: "power2.in", overwrite: true });
+  }
+
+  // peek in after the first screen; lean with the scroll; nudge again when the page goes quiet
+  let lastY = scrollY, lastT = performance.now(), idle = 0;
+  const lean = gsap && !R ? gsap.quickTo(pencil, "rotation", { duration: 0.5, ease: "power3" }) : null;
+  window.addEventListener("scroll", () => {
+    const y = scrollY, t = performance.now();
+    const v = (y - lastY) / Math.max(8, t - lastT);
+    lastY = y; lastT = t;
+    if (y > innerHeight * 0.35) dockIn(); else dockOut();
+    if (lean && docked && !held && !gsap.isTweening(pencil)) {
+      lean(REST + gsap.utils.clamp(-14, 14, v * 6));
+      clearTimeout(lean.t);
+      lean.t = setTimeout(() => lean(REST), 140);
+    }
+    clearTimeout(idle);
+    idle = setTimeout(() => { if (noteShows < 3) { wiggle(); showNote(true); } }, 4500);
+  }, { passive: true });
+  if (scrollY > innerHeight * 0.35) dockIn();
+
+  function pickUp(x, y) {
+    if (held) return;
+    held = true;
+    dock.classList.add("is-held");
+    gsap && gsap.killTweensOf([pencil, note]);
+    gsap && gsap.set(note, { autoAlpha: 0 });
+    if (!gsap || R || !docked) { gsap && gsap.set(pencil, { autoAlpha: 0 }); return; }
+    const t = tipRest();
+    // shrink into the pointer, turning to the same angle as the pencil cursor
+    gsap.timeline()
+      .to(pencil, { x: x - t.x, y: y - t.y, rotation: -42, scale: 34 / pencil.offsetWidth * 1.4, duration: 0.42, ease: "power3.inOut" })
+      .to(pencil, { autoAlpha: 0, duration: 0.12 }, "-=0.08");
+  }
+  function putBack() {
+    if (!held) return;
+    held = false;
+    dock.classList.remove("is-held");
+    if (!gsap) return;
+    const inView = scrollY > innerHeight * 0.35;
+    docked = inView;
+    dock.classList.toggle("is-docked", inView);
+    if (R || !inView) { gsap.set(pencil, inView ? { x: 0, y: 0, scale: 1, rotation: REST, autoAlpha: 1 } : { ...OUT(), y: 0, scale: 1, autoAlpha: 1 }); return; }
+    const t = tipRest();
+    gsap.timeline()
+      .set(pencil, { x: hand.x - t.x, y: hand.y - t.y, rotation: -42, scale: 34 / pencil.offsetWidth * 1.4, autoAlpha: 1 })
+      .to(pencil, { x: 0, y: 0, scale: 1, rotation: REST, duration: 0.8, ease: "back.out(1.4)" });
+  }
+
+  // tap = pick it up; press and drag = pick it up and start a line right away
+  let grab = null;
+  pencil.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    grab = { x: e.clientX, y: e.clientY, id: e.pointerId, drawing: false };
+    pencil.setPointerCapture(e.pointerId);
+  });
+  pencil.addEventListener("pointermove", (e) => {
+    if (!grab) return;
+    hand = { x: e.clientX, y: e.clientY };
+    if (!grab.drawing && Math.hypot(e.clientX - grab.x, e.clientY - grab.y) > 8) {
+      grab.drawing = true;
+      pickUp(e.clientX, e.clientY);
+      toggle(true, true);
+      begin(e);
+    }
+    if (grab.drawing) move(e);
+  });
+  pencil.addEventListener("pointerup", (e) => {
+    if (!grab) return;
+    const g = grab;
+    grab = null;
+    if (g.drawing) { end(); return; }
+    hand = { x: e.clientX, y: e.clientY };
+    pickUp(e.clientX, e.clientY);
+    toggle(true, true);
+  });
+  pencil.addEventListener("pointercancel", () => { if (grab && grab.drawing) end(); grab = null; });
+  pencil.addEventListener("pointerenter", () => { if (!held && docked && gsap && !R) gsap.to(pencil, { x: -18, rotation: REST - 6, duration: 0.35, ease: "back.out(2)", overwrite: "auto" }); });
+  pencil.addEventListener("pointerleave", () => { if (!held && docked && gsap && !R && !grab) gsap.to(pencil, { x: 0, rotation: REST, duration: 0.7, ease: "elastic.out(1, 0.4)", overwrite: "auto" }); });
+  pencil.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    pickUp(innerWidth / 2, innerHeight / 2);
+    toggle(true, true);
+  });
+
   function pencilCursor(c) {
     const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><path d='M3 31l2-8L24 4a3 3 0 0 1 4 0l2 2a3 3 0 0 1 0 4L11 29z' fill='${c}' stroke='#14161A' stroke-width='2.4' stroke-linejoin='round'/><path d='M3 31l2-8 6 6z' fill='#F6D7A7' stroke='#14161A' stroke-width='2' stroke-linejoin='round'/><path d='M3 31l1-3.5 2.5 2.5z' fill='#14161A'/></svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 3 31, crosshair`;
@@ -219,6 +385,7 @@
     k.querySelector(".draw-bar__keep-text").textContent = keep ? "Keep" : "15s";
     chip.classList.toggle("is-shown", !on && !empty);
     surface.style.cursor = pencilCursor(color);
+    dock.querySelector(".pencil-dock__lead").setAttribute("fill", color);
   }
 
   const canUndraw = () => !R && gsap && window.DrawSVGPlugin;
@@ -293,8 +460,13 @@
       .to(h, { autoAlpha: 0, y: -10, duration: 0.3 }, "+=2.6");
   }
 
-  function toggle(next) {
+  function toggle(next, fromDock) {
+    const was = on;
     on = typeof next === "boolean" ? next : !on;
+    if (on === was) return;
+    // the big pencil leaves its dock while you draw (towards the middle if you used another switch)
+    if (on && !fromDock) pickUp(innerWidth / 2, innerHeight / 2);
+    if (!on) putBack();
     html.classList.toggle("is-drawing", on);
     toggles().forEach((t) => t.setAttribute("aria-pressed", String(on)));
     updateButtons();

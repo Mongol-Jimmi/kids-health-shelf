@@ -81,7 +81,7 @@
       <div class="wrap">
         <span class="kicker" data-reveal>The shelf</span>
         <h1 class="display h-xl" data-split="lines">Pull a book<br />off the shelf.</h1>
-        <p class="lede" data-reveal>Every Kids Health Shelf book is written and illustrated by Western students. Tap a spine to open it up.</p>
+        <p class="lede" data-reveal>Every Kids Health Shelf book is written and illustrated by Western students. Pull a spine off the shelf and flip through the whole book, right here.</p>
       </div>
       <span class="sticker hide-sm" data-sticker="burst" data-pop style="width:96px;height:96px;right:8%;top:150px"></span>
       <span class="sticker hide-sm" data-sticker="starPink" data-pop data-delay=".2" style="width:64px;height:64px;right:18%;top:300px"></span>
@@ -90,9 +90,9 @@
     <section class="bookshelf" aria-label="Bookshelf">
       <div class="bookshelf__row">
         <div class="book-stack hide-sm" aria-hidden="true"><span data-sticker="apple" style="width:80px;height:80px;margin-bottom:-4px"></span><i style="width:190px;background:var(--sky)"></i><i style="width:170px;background:var(--pink)"></i><i style="width:200px;background:var(--sage);border-bottom-width:2.5px"></i></div>
-        <button class="spine cover--sage" style="height:350px" data-book="rambutan" data-cursor="open me" type="button">The Girl Under the Rambutan Tree <small>NR</small></button>
-        <button class="spine cover--yellow" style="height:318px;width:100px" data-book="nobody" data-cursor="open me" type="button">Nobody Looks Like Me! <small>EL</small></button>
-        <button class="spine cover--sky" style="height:296px;width:92px" data-book="microville" data-cursor="open me" type="button">MicroVille <small>BR</small></button>
+        <button class="spine spine--real" style="--w:96px;background-image:url(assets/books/spines/rambutan-tree.webp)" data-book="rambutan" data-cursor="read me" type="button"><span class="sr-only">The Girl Under the Rambutan Tree, by Nadith Ranasinghe</span></button>
+        <button class="spine spine--real" style="--w:80px;background-image:url(assets/books/spines/nobody-looks-like-me.webp)" data-book="nobody" data-cursor="read me" type="button"><span class="sr-only">Nobody Looks Like Me!, by Emily Leha</span></button>
+        <button class="spine spine--real" style="--w:96px;background-image:url(assets/books/spines/microville.webp)" data-book="microville" data-cursor="read me" type="button"><span class="sr-only">MicroVille, by Bahareh Rahimi Shahmirzadi</span></button>
         <button class="spine spine--ghost" style="height:330px;width:70px" data-book="soon" data-cursor="peek" type="button">your book? <small>04</small></button>
         <span class="shelf-sticker shelf-goose" data-sticker="goose" data-honk data-eyes data-cursor="honk!" style="right:3%;width:150px;height:175px"></span>
       </div>
@@ -113,7 +113,7 @@
             <span class="hand" data-reveal>author highlight</span>
             <h2 class="display h-md" data-split="lines">The Girl Under the Rambutan Tree</h2>
             <p data-reveal>Nadith wrote this one for his mom, Deepika, who grew up in a little village in Sri Lanka. She sewed her own uniform and spread bananas on her toast to fit in, then learned that true friends love you for who you are. She grew up to be a doctor.</p>
-            <a class="btn btn--blue" href="assets/books/rambutan-tree.pdf" target="_blank" rel="noopener" data-reveal style="align-self:flex-start">Read the book
+            <a class="btn btn--blue" href="assets/books/rambutan-tree.pdf" target="_blank" rel="noopener" data-read="rambutan" data-reveal style="align-self:flex-start">Read the book
               <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </article>
@@ -129,7 +129,7 @@
             <span class="hand" data-reveal>author highlight</span>
             <h2 class="display h-md" data-split="lines">Nobody Looks Like Me!</h2>
             <p data-reveal>On her first day at a new school, Amanda can't find anyone who looks like her. Her science-teacher dad explains DNA: we all look different, but almost all of our DNA is the same. The next morning she says hi to Zoe, and green turns out to be both their favourite colour.</p>
-            <a class="btn btn--blue" href="assets/books/nobody-looks-like-me.pdf" target="_blank" rel="noopener" data-reveal style="align-self:flex-start">Read the book
+            <a class="btn btn--blue" href="assets/books/nobody-looks-like-me.pdf" target="_blank" rel="noopener" data-read="nobody" data-reveal style="align-self:flex-start">Read the book
               <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </article>
@@ -145,7 +145,7 @@
             <span class="hand" data-reveal>brand new on the shelf</span>
             <h2 class="display h-md" data-split="lines">MicroVille</h2>
             <p data-reveal>Mimi won't try new foods, so her doctor tells her a secret: there's a whole town of microbes living in her gut. Fiona Fiber, Vita Vitamin, Penny Protector and Cleo Clean-Up all help out, and every new food brings a new neighbour. MicroVille is strongest because everyone is different.</p>
-            <a class="btn btn--blue" href="assets/books/microville.pdf" target="_blank" rel="noopener" data-reveal style="align-self:flex-start">Read the book
+            <a class="btn btn--blue" href="assets/books/microville.pdf" target="_blank" rel="noopener" data-read="microville" data-reveal style="align-self:flex-start">Read the book
               <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
         </article>
@@ -163,27 +163,40 @@
       </div>
     </section>
 
-    <div class="book-modal" role="dialog" aria-modal="true" aria-labelledby="book-title">
-      <div class="book-modal__scrim" data-close></div>
-      <div class="open-book">
-        <button class="open-book__close" type="button" aria-label="Close book" data-close data-cursor="close">✕</button>
-        <div class="open-book__page open-book__left"><div class="open-book__art"></div></div>
-        <div class="open-book__page open-book__right">
+    <div class="reader" role="dialog" aria-modal="true" aria-labelledby="reader-title">
+      <div class="reader__scrim" data-close></div>
+      <header class="reader__head">
+        <div class="reader__titles">
           <span class="kicker" data-b="num"></span>
-          <h3 id="book-title" data-b="title"></h3>
-          <span class="mono" data-b="by" style="font-size:15px"></span>
-          <p data-b="blurb"></p>
-          <div class="book-card__facts" data-b="facts"></div>
-          <div class="open-book__ctas">
-            <a class="btn btn--blue" data-b="pdf" target="_blank" rel="noopener" hidden>Read the book</a>
-            <a class="btn" data-b="cta"></a>
-          </div>
+          <h3 id="reader-title" data-b="title"></h3>
+          <span class="mono" data-b="by"></span>
         </div>
-        <div class="open-book__cover">
-          <div class="face face--front cover"><span class="cover__title" data-b="ctitle"></span><span class="cover__by" data-b="cby"></span><span class="cover__art" data-b="cart"></span></div>
-          <div class="face face--back"></div>
-        </div>
+        <button class="reader__close" type="button" aria-label="Close the book" data-close data-cursor="close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+      <div class="reader__stage">
+        <div class="flipbook" aria-live="polite"></div>
+        <div class="closed-book" aria-hidden="true"></div>
       </div>
+      <footer class="reader__bar">
+        <button class="reader__turn" type="button" data-turn="-1" aria-label="Previous page" data-cursor="back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <div class="reader__scrub">
+          <input type="range" min="0" max="1" value="0" step="1" aria-label="Jump to a page" data-b="scrub" />
+          <span class="reader__count mono" data-b="count"></span>
+        </div>
+        <button class="reader__turn" type="button" data-turn="1" aria-label="Next page" data-cursor="next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="reader__links">
+          <a class="reader__pdf" data-b="pdf" target="_blank" rel="noopener" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF</a>
+          <a class="btn reader__cta" data-b="cta"></a>
+        </div>
+      </footer>
+      <p class="reader__tip hand" aria-hidden="true">tap or drag the page to turn it!</p>
     </div>
   </main>
 

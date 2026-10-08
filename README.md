@@ -48,12 +48,16 @@ Edit `assets/data/products.json`:
 
 Then push **and** run `npx wrangler deploy` in `worker/` again. The worker keeps its own copy of the prices, so this step is needed every time prices change.
 
-## Book PDFs
+## Books (the shelf and the flip-book reader)
+
+Each book on the Books page has a spine made from its own cover, and opens into a flip-book of its real pages (drag or tap a page, arrow keys, or the slider). The PDF is still offered as a download.
+
+To add or replace a book:
 
 1. Put the PDF in `assets/books/` (for example `assets/books/rambutan-tree.pdf`).
-2. In `assets/js/books.js`, set that book's `pdf: "assets/books/rambutan-tree.pdf"`.
-
-A blue **Read the book** button then appears when the book is opened on the Books page.
+2. Run `python tools/build_books.py` (needs `pip install pymupdf pillow numpy`). It writes one image per page to `assets/books/pages/<name>/` and the spine to `assets/books/spines/<name>.webp`. A brand-new book also needs a spine recipe in `BOOKS` at the bottom of that script (copy one of the three and adjust the crop boxes).
+3. In `assets/js/books.js`, set that book's `slug` (the PDF name) and `pages` (its page count).
+4. In `books.html`, give the book a `spine spine--real` button on the shelf pointing at its spine image.
 
 ## Team photos
 

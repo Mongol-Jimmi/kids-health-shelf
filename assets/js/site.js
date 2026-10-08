@@ -105,8 +105,9 @@
   function initMotionToggle() {
     document.querySelectorAll(".motion-btn").forEach((btn) => {
       btn.setAttribute("aria-pressed", String(!REDUCED));
-      btn.addEventListener("click", () => setMotion(REDUCED));
+      btn.addEventListener("click", () => { KHS.local.set("khs-motion-seen", "1"); setMotion(REDUCED); });
     });
+    initMotionNudge();
     const osReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!REDUCED || !osReduced || KHS.local.get("khs-motion") === "off" || KHS.session.get("khs-toast-closed")) return;
     const toast = document.createElement("div");
@@ -121,6 +122,58 @@
       if (act === "on") setMotion(true);
       if (act === "close") { KHS.session.set("khs-toast-closed", "1"); toast.remove(); }
     });
+  }
+
+  /* A hand-drawn arrow at the top of the page pointing at the animations switch,
+     until the visitor has used it once. On phones the switch lives in the menu. */
+  function initMotionNudge() {
+    if (KHS.local.get("khs-motion-seen")) return;
+    const btn = Array.from(document.querySelectorAll(".nav__tools .motion-btn")).find((b) => b.offsetParent);
+    const target = btn || document.querySelector(".burger");
+    if (!target || !target.offsetParent) return;
+    const el = document.createElement("div");
+    el.className = "motion-nudge hand";
+    el.setAttribute("aria-hidden", "true");
+    const words = !btn ? "animations on or off?<br>they're in here!"
+      : REDUCED ? "want it all <b>animated</b>?<br>tap here!" : "animations on or <b>off</b>?<br>tap here!";
+    el.innerHTML = '<svg viewBox="0 0 74 66"><path d="M10 62 C10 32 32 12 62 8"/><path d="M47 3 L63 8 L55 22"/></svg>' +
+      `<span class="motion-nudge__text">${words}</span>`;
+    document.body.appendChild(el);
+    const place = () => {
+      const r = target.getBoundingClientRect();
+      // the arrow's tip is 21px in from the right edge of the note and 8px down from its top
+      el.style.right = Math.max(8, innerWidth - (r.left + r.width / 2) - 21) + "px";
+      el.style.top = r.bottom - 4 + "px";
+    };
+    place();
+    window.addEventListener("resize", place);
+    const arrow = el.querySelectorAll("path");
+    let shown = false, bob = null;
+    function show() {
+      if (shown || !el.isConnected) return;
+      shown = true;
+      place();
+      if (btn) btn.classList.add("is-nudged");
+      if (REDUCED) { gsap.set(el, { autoAlpha: 1 }); return; }
+      gsap.timeline()
+        .fromTo(el, { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "back.out(2)" })
+        .fromTo(arrow, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.5, stagger: 0.3, ease: "power2.out" }, "<");
+      // the arrow keeps poking at the button
+      bob = gsap.to(el.querySelector("svg"), { x: 5, y: -6, duration: 0.55, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 1 });
+    }
+    function hide(forever) {
+      if (forever) { if (bob) bob.kill(); if (btn) btn.classList.remove("is-nudged"); }
+      if (!shown) { if (forever) el.remove(); return; }
+      shown = false;
+      if (btn) btn.classList.remove("is-nudged");
+      gsap.to(el, { autoAlpha: 0, y: -6, duration: 0.25, onComplete: () => { if (forever) el.remove(); } });
+    }
+    // only near the top of the page, where the nav (and the switch) is in view
+    setTimeout(() => { if (scrollY < 80) show(); }, REDUCED ? 300 : 1500);
+    window.addEventListener("scroll", () => { if (scrollY > 80) hide(); else if (el.isConnected) setTimeout(() => { if (scrollY <= 80) show(); }, 200); }, { passive: true });
+    target.addEventListener("click", () => hide(true));
+    target.addEventListener("pointerenter", () => { if (shown && !REDUCED) gsap.to(el, { scale: 1.06, duration: 0.2 }); });
+    target.addEventListener("pointerleave", () => { if (shown && !REDUCED) gsap.to(el, { scale: 1, duration: 0.3 }); });
   }
 
   function initSoundToggle() {
