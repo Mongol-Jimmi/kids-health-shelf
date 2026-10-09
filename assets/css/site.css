@@ -493,9 +493,17 @@ html.js-intro .skip-intro { display: block; }
 .polaroid__name { font-family: var(--font-hand); font-size: 28px; line-height: 1.05; }
 .polaroid__role { font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-open); color: var(--dim); }
 .polaroid__pin { position: absolute; top: -10px; left: 50%; margin-left: -11px; width: 22px; height: 22px; border-radius: 50%; background: var(--red); border: 2.5px solid var(--ink); z-index: 2; transform: translateZ(1px); }
-.authors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 64px; }
+.authors { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 32px; margin-top: 64px; }
 .author { display: flex; gap: 24px; align-items: center; padding: 28px; border: 2.5px solid var(--ink); border-radius: var(--radius-md); background: var(--paper); box-shadow: var(--shadow-hard); }
-.author__mini { width: 96px; height: 120px; flex-shrink: 0; border: 2.5px solid var(--ink); border-radius: 6px; display: flex; align-items: flex-end; padding: 8px; font-family: var(--font-hand); font-size: 15px; line-height: 1; }
+.author__mini {
+  width: 100px; aspect-ratio: 612 / 792; flex-shrink: 0; overflow: hidden; display: block;
+  border: 2.5px solid var(--ink); border-radius: 3px 8px 8px 3px; background: var(--wash);
+  box-shadow: inset 4px 0 0 rgba(20, 22, 26, 0.18), 4px 4px 0 var(--ink);
+  transform: rotate(-3deg); transition: transform 0.3s var(--ease-out);
+}
+.author__mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.author:nth-child(even) .author__mini { transform: rotate(2.5deg); }
+.author__mini:hover, .author__mini:focus-visible { transform: rotate(0) translateY(-6px) scale(1.06); }
 .author h3 { margin: 0; font-size: 26px; font-weight: 600; letter-spacing: var(--tracking-snug); line-height: 1.1; }
 .author p { margin: 6px 0 0; font-size: 15px; color: var(--dim); }
 

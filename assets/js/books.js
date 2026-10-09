@@ -542,6 +542,10 @@
     }, 120);
   });
 
+  // books.html?read=microville (the covers on the Team page) opens that book straight away
+  const wanted = new URLSearchParams(location.search).get("read");
+  if (BOOKS[wanted]) setTimeout(() => openBook(wanted, null), R ? 0 : 900);
+
   /* ---------------- likes ---------------- */
   gsap.utils.toArray(".like-btn").forEach((btn) => {
     const likes = btn.parentElement.querySelector("[data-likes]");
