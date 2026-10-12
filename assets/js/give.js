@@ -17,8 +17,13 @@
   const FUNDS = { chf: { label: "Children's Health Foundation" }, shelf: { label: "Printing the next books" } };
   const GIVE = { min: 100, max: 100000, presets: [500, 1000, 2500] };
   const WHERE = {
-    chf: 'Every dollar you give for a book (after Stripe\'s card fee) goes to <a href="https://childhealth.ca/" target="_blank" rel="noopener">Children\'s Health Foundation</a>, for Children\'s Hospital at LHSC. We send it each term.',
-    shelf: "Every dollar (after Stripe's card fee) prints our books for elementary schools and libraries."
+    chf: 'Every dollar you give for a book goes to <a href="https://childhealth.ca/" target="_blank" rel="noopener">Children\'s Health Foundation</a>, for Children\'s Hospital at LHSC.',
+    shelf: "Every dollar prints our books for elementary schools and libraries."
+  };
+  // the only place the mechanics are spelled out: the small print under the button
+  const FINE = {
+    chf: "Paid securely to Kids Health Shelf, a student club, in CAD. We pass book gifts on to Children's Health Foundation each term, after card fees. No tax receipts.",
+    shelf: "Paid securely to Kids Health Shelf, a student club, in CAD. Card fees come off the top. No tax receipts."
   };
   const settings = () => (KHS.catalog || Promise.resolve(null)).then((c) => ({
     url: (c && c.checkoutUrl) || "",
@@ -76,7 +81,7 @@
       <p class="give__where"><span class="kicker">Where it goes</span><b>${esc(label)}</b><span>${WHERE[fund]}</span></p>
       <button class="give__go" type="submit"></button>
       <p class="give__msg" role="status"></p>
-      <p class="give__fine">Paid to Kids Health Shelf by Stripe · CAD · we're a student club, so no tax receipts</p>`;
+      <p class="give__fine">${FINE[fund]}</p>`;
 
     const go = form.querySelector(".give__go");
     const msg = form.querySelector(".give__msg");
@@ -261,7 +266,7 @@
       <div class="give-thanks__copy">
         <b class="hand">thank you!</b>
         <p>${link
-          ? `Your gift for <i>${esc(title)}</i> is in. Every book dollar (after Stripe's card fee) goes to Children's Health Foundation; we send it each term.`
+          ? `Your gift for <i>${esc(title)}</i> is in. Every book dollar goes to Children's Health Foundation.`
           : "Your gift is in, and it goes into printing books for elementary schools and libraries."}</p>
         ${link ? `<a class="btn btn--yellow give-thanks__dl" href="${esc(link.getAttribute("href"))}" download>Download the PDF ${arrow}</a>` : ""}
       </div>
