@@ -1,0 +1,26 @@
+{
+  "articles": [
+    {
+      "outlet": "CBC News",
+      "date": "2025-07-06",
+      "title": "These students are bringing diversity to children's literature, one book at a time",
+      "url": "https://www.cbc.ca/news/canada/london/these-students-are-bringing-diversity-to-children-s-literature-one-book-at-a-time-1.7575520",
+      "summary": "Western students are writing and illustrating picture books through a multicultural lens, so more kids can find people like themselves in the stories and media they grow up with.",
+      "read": "Read on CBC",
+      "tint": "sky"
+    },
+    {
+      "outlet": "Western Gazette",
+      "date": "2024-09-17",
+      "title": "Science students create, donate books tackling representation",
+      "url": "https://westerngazette.ca/science-students-create-donate-books-tackling-representation/article_e42bb8b2-750a-11ef-b9cb-33aa2d5f8fbf.html",
+      "byline": "Owen Johnston, Culture Editor",
+      "summary": "A group of Western science students make picture books that bring marginalized stories to young readers, then donate copies to libraries across London.",
+      "read": "Read in the Gazette",
+      "tint": "pink"
+    }
+  ],
+  "upcoming": [
+    { "outlet": "Coming soon", "note": "More stories about the club are on the way." }
+  ]
+}

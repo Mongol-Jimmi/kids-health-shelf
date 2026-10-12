@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gochi+Hand&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/merch.css" />
+  <link rel="stylesheet" href="assets/css/give.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -38,6 +40,7 @@
       <a class="nav__link" href="books.html" aria-current="page">Books</a>
       <a class="nav__link" href="shop.html">Shop</a>
       <a class="nav__link" href="team.html">Team</a>
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="involved.html">Get involved</a>
       <a class="btn btn--ink nav__cta" href="involved.html#donate">Support us</a>
     </nav>
@@ -51,7 +54,7 @@
       <button class="sound-btn draw-btn" type="button" aria-label="Pick up the pencil and draw on the page" aria-pressed="false" data-cursor="draw!">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.2-4.6L15.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z" fill="#fff"/><path d="M13.6 7l3.4 3.4"/><path d="M4 20l1.2-4.6 3.4 3.4z" fill="currentColor"/></svg>
       </button>
-      <button class="cart-btn" type="button" aria-label="Open your sticker bag" data-cursor="bag">
+      <button class="cart-btn" type="button" aria-label="Open your bag" data-cursor="bag">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 8h14l-1.4 11.2a1 1 0 0 1-1 .8H7.4a1 1 0 0 1-1-.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
         <span class="cart-btn__count">0</span>
       </button>
@@ -60,9 +63,10 @@
   </header>
 
   <div class="menu" aria-label="Mobile menu">
-    <a href="books.html">Books</a>
+    <a href="books.html" aria-current="page">Books</a>
     <a href="shop.html">Shop</a>
     <a href="team.html">Team</a>
+    <a href="news.html">News</a>
     <a href="involved.html">Get involved</a>
     <a href="involved.html#donate">Support us</a>
     <div class="menu__toggles">
@@ -113,8 +117,11 @@
             <span class="hand" data-reveal>author highlight</span>
             <h2 class="display h-md" data-split="lines">The Girl Under the Rambutan Tree</h2>
             <p data-reveal>Nadith wrote this one for his mom, Deepika, who grew up in a little village in Sri Lanka. She sewed her own uniform and spread bananas on her toast to fit in, then learned that true friends love you for who you are. She grew up to be a doctor.</p>
-            <a class="btn btn--blue" href="assets/books/rambutan-tree.pdf" target="_blank" rel="noopener" data-read="rambutan" data-reveal style="align-self:flex-start">Read the book
-              <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="highlight__ctas" data-reveal>
+              <a class="btn btn--blue" href="assets/books/rambutan-tree.pdf" target="_blank" rel="noopener" data-read="rambutan">Read the book
+                <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="dl-link" href="assets/books/rambutan-tree.pdf" download data-give="chf" data-book="rambutan-tree" data-title="The Girl Under the Rambutan Tree" data-cursor="keep it!"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download PDF<span class="sr-only"> of The Girl Under the Rambutan Tree</span></a>
+            </div>
           </div>
         </article>
 
@@ -129,8 +136,11 @@
             <span class="hand" data-reveal>author highlight</span>
             <h2 class="display h-md" data-split="lines">Nobody Looks Like Me!</h2>
             <p data-reveal>On her first day at a new school, Amanda can't find anyone who looks like her. Her science-teacher dad explains DNA: we all look different, but almost all of our DNA is the same. The next morning she says hi to Zoe, and green turns out to be both their favourite colour.</p>
-            <a class="btn btn--blue" href="assets/books/nobody-looks-like-me.pdf" target="_blank" rel="noopener" data-read="nobody" data-reveal style="align-self:flex-start">Read the book
-              <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="highlight__ctas" data-reveal>
+              <a class="btn btn--blue" href="assets/books/nobody-looks-like-me.pdf" target="_blank" rel="noopener" data-read="nobody">Read the book
+                <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="dl-link" href="assets/books/nobody-looks-like-me.pdf" download data-give="chf" data-book="nobody-looks-like-me" data-title="Nobody Looks Like Me!" data-cursor="keep it!"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download PDF<span class="sr-only"> of Nobody Looks Like Me!</span></a>
+            </div>
           </div>
         </article>
 
@@ -145,10 +155,26 @@
             <span class="hand" data-reveal>brand new on the shelf</span>
             <h2 class="display h-md" data-split="lines">MicroVille</h2>
             <p data-reveal>Mimi won't try new foods, so her doctor tells her a secret: there's a whole town of microbes living in her gut. Fiona Fiber, Vita Vitamin, Penny Protector and Cleo Clean-Up all help out, and every new food brings a new neighbour. MicroVille is strongest because everyone is different.</p>
-            <a class="btn btn--blue" href="assets/books/microville.pdf" target="_blank" rel="noopener" data-read="microville" data-reveal style="align-self:flex-start">Read the book
-              <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <div class="highlight__ctas" data-reveal>
+              <a class="btn btn--blue" href="assets/books/microville.pdf" target="_blank" rel="noopener" data-read="microville">Read the book
+                <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="dl-link" href="assets/books/microville.pdf" download data-give="chf" data-book="microville" data-title="MicroVille" data-cursor="keep it!"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download PDF<span class="sr-only"> of MicroVille</span></a>
+            </div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="section" id="free" style="padding-top:0">
+      <div class="wrap free-band" data-reveal>
+        <span class="free-band__badge" aria-hidden="true"><span><b>free</b>to read</span></span>
+        <div>
+          <span class="hand" style="font-size:30px;color:var(--blue)">reading is free, always</span>
+          <h2 class="display h-md">Read every book, free.</h2>
+          <p>Flip through any book right here as many times as you like. If you'd like a PDF to keep, donate what you want for it. $0 is fine too.</p>
+          <p>Every dollar you give for a book (after Stripe's card fee) goes to <a href="https://childhealth.ca/" target="_blank" rel="noopener">Children's Health Foundation</a>, which supports Children's Hospital at LHSC in London, Ontario. The money comes to the club first so there's a clear record of every gift, and we send all of it on each term.</p>
+          <p class="mono">We're a student club, so we can't issue tax receipts.</p>
+        </div>
       </div>
     </section>
 
@@ -191,8 +217,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
         </button>
         <div class="reader__links">
-          <a class="reader__pdf" data-b="pdf" target="_blank" rel="noopener" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF</a>
+          <a class="reader__pdf" data-b="pdf" data-give="chf" download data-cursor="keep it!">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download PDF</a>
           <a class="btn reader__cta" data-b="cta"></a>
         </div>
       </footer>
@@ -204,7 +230,7 @@
     <div class="footer__top">
       <div class="footer__note">
         <span class="hand">psst, the goose wants to hear from you.</span>
-        <p>DM us on Instagram, or find every form, application and donation link on our Linktree.</p>
+        <p>DM us on Instagram, or find every form and application on our Linktree. Donations happen <a href="involved.html#donate" style="text-decoration:underline;text-underline-offset:3px">right here on the site</a>.</p>
       </div>
       <div class="footer__cols">
         <div class="footer__col">
@@ -213,6 +239,7 @@
           <a href="shop.html">Sticker shop</a>
           <a href="index.html#mission">Our mission</a>
           <a href="team.html">Meet the team</a>
+          <a href="news.html">In the news</a>
           <a href="involved.html">Get involved</a>
         </div>
         <div class="footer__col">
@@ -248,6 +275,7 @@
   <script src="assets/js/site.js"></script>
   <script src="assets/js/draw.js"></script>
   <script src="assets/js/cart.js"></script>
+  <script src="assets/js/give.js"></script>
   <script src="assets/js/books.js"></script>
 </body>
 </html>

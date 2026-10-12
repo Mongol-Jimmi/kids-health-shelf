@@ -1,0 +1,68 @@
+/* Merch + book drops: made-to-order tees and totes with a size picker, limited
+   pre-orders, "coming soon" drafts, and the bag bits every page needs
+   (link this file on every page that loads cart.js). */
+
+/* ---------- product art: a sticker printed on a tee, tote or book cover ---------- */
+.wear { position: relative; display: block; width: 100%; height: 100%; }
+.wear > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.wear__print { position: absolute; display: block; }
+.wear__print svg { width: 100%; height: 100%; filter: none; }
+.wear--tee .wear__print { left: 33%; top: 30%; width: 34%; height: 34%; }
+.wear--tote .wear__print { left: 31%; top: 48%; width: 38%; height: 38%; }
+.wear--book .wear__print { left: 38%; top: 26%; width: 40%; height: 40%; }
+
+/* ---------- bag drawer (every page) ---------- */
+.bag__note {
+  margin: 0; padding: 10px 14px; background: var(--yellow); border: 2px solid var(--ink); border-radius: var(--radius-sm);
+  font-size: 14px; line-height: 1.4;
+}
+.stepper button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ---------- shop cards ---------- */
+.product--merch .product__art, .product--preorder .product__art { width: 76%; height: 76%; }
+.product__kind {
+  position: absolute; left: 14px; bottom: 14px; padding: 4px 10px; border-radius: var(--pill); background: var(--ink); color: var(--paper);
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-open); text-transform: uppercase;
+}
+.product--preorder .product__kind { background: var(--blue); border: 2px solid var(--ink); }
+
+/* the draft ribbon across the top-right corner */
+.ribbon {
+  position: absolute; top: 26px; right: -44px; z-index: 2; width: 180px; padding: 5px 0; transform: rotate(38deg);
+  background: var(--yellow); border-block: 2.5px solid var(--ink); text-align: center;
+  font-family: var(--font-hand); font-size: 22px; line-height: 1; pointer-events: none;
+}
+.product.is-draft .product__art, .product.is-closed .product__art { cursor: default; }
+.product.is-closed .product__tile { filter: grayscale(0.85); opacity: 0.7; }
+
+.product__made { margin: -4px 0 0; font-family: var(--font-mono); font-size: 13px; line-height: 1.35; color: var(--dim); }
+.product__drop {
+  list-style: none; margin: -4px 0 0; padding: 10px 12px; border: 2px dashed var(--ink); border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.45; color: var(--dim);
+}
+.product__drop b { color: var(--ink); }
+.product.is-closed .product__drop li:nth-child(2) { color: var(--red); font-weight: 700; }
+
+/* size picker: a row of pills, one per size */
+.sizes { display: flex; gap: 6px; }
+.sizes button {
+  flex: 1 1 0; min-width: 0; height: 40px; border-radius: var(--pill); border: 2px solid var(--ink); background: var(--paper);
+  font-weight: 700; font-size: 15px; transition: background-color 0.2s, color 0.2s;
+}
+.sizes button:hover { background: var(--sky); }
+.sizes button[aria-checked="true"] { background: var(--ink); color: var(--paper); }
+.sizes button:disabled { opacity: 0.45; border-style: dashed; cursor: not-allowed; background: var(--paper); }
+.sizes__hint { margin: -8px 0 -4px; font-size: 22px; line-height: 1.1; color: var(--red); transform: rotate(-1.5deg); }
+.sizes__hint:empty { display: none; }
+
+.product__add:disabled { background: var(--paper); color: var(--dim); border-style: dashed; cursor: not-allowed; transform: none; }
+
+@media (max-width: 860px) {
+  .product__kind { font-size: 10px; left: 8px; bottom: 8px; padding: 2px 8px; }
+  .ribbon { top: 16px; right: -44px; width: 150px; padding: 3px 0; font-size: 15px; }
+  .product__made, .product__drop { font-size: 11.5px; }
+  .product__drop { padding: 8px 9px; }
+  .sizes { gap: 4px; }
+  .sizes button { height: 40px; font-size: 13px; }
+  .sizes__hint { font-size: 19px; }
+}

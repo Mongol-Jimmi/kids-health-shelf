@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gochi+Hand&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/merch.css" />
+  <link rel="stylesheet" href="assets/css/news.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -38,6 +40,7 @@
       <a class="nav__link" href="books.html">Books</a>
       <a class="nav__link" href="shop.html">Shop</a>
       <a class="nav__link" href="team.html">Team</a>
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="involved.html">Get involved</a>
       <a class="btn btn--ink nav__cta" href="involved.html#donate">Support us</a>
     </nav>
@@ -51,7 +54,7 @@
       <button class="sound-btn draw-btn" type="button" aria-label="Pick up the pencil and draw on the page" aria-pressed="false" data-cursor="draw!">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.2-4.6L15.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z" fill="#fff"/><path d="M13.6 7l3.4 3.4"/><path d="M4 20l1.2-4.6 3.4 3.4z" fill="currentColor"/></svg>
       </button>
-      <button class="cart-btn" type="button" aria-label="Open your sticker bag" data-cursor="bag">
+      <button class="cart-btn" type="button" aria-label="Open your bag" data-cursor="bag">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 8h14l-1.4 11.2a1 1 0 0 1-1 .8H7.4a1 1 0 0 1-1-.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
         <span class="cart-btn__count">0</span>
       </button>
@@ -63,6 +66,7 @@
     <a href="books.html">Books</a>
     <a href="shop.html">Shop</a>
     <a href="team.html">Team</a>
+    <a href="news.html">News</a>
     <a href="involved.html">Get involved</a>
     <a href="involved.html#donate">Support us</a>
     <div class="menu__toggles">
@@ -147,6 +151,19 @@
         </div>
       </div>
     </div>
+
+    <!-- AS SEEN IN (the full clippings live on news.html, from assets/data/press.json) -->
+    <section class="press-strip" aria-labelledby="press-strip-title">
+      <div class="wrap press-strip__row">
+        <span class="kicker" id="press-strip-title" data-reveal>As seen in</span>
+        <ul class="press-strip__list" data-reveal data-delay=".1">
+          <li><a class="press-strip__outlet" href="https://www.cbc.ca/news/canada/london/these-students-are-bringing-diversity-to-children-s-literature-one-book-at-a-time-1.7575520" target="_blank" rel="noopener" data-cursor="read it" aria-label="CBC News, July 2025 (opens in a new tab)">CBC News <span class="press-strip__date">Jul 2025</span></a></li>
+          <li><a class="press-strip__outlet" href="https://westerngazette.ca/science-students-create-donate-books-tackling-representation/article_e42bb8b2-750a-11ef-b9cb-33aa2d5f8fbf.html" target="_blank" rel="noopener" data-cursor="read it" aria-label="Western Gazette, September 2024 (opens in a new tab)">Western Gazette <span class="press-strip__date">Sep 2024</span></a></li>
+        </ul>
+        <a class="press-strip__all" href="news.html" data-reveal data-delay=".2">All press
+          <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </section>
 
     <!-- HOW A BOOK GETS MADE -->
     <section class="section" id="how">
@@ -291,13 +308,13 @@
           <article class="flyer" data-rot="2" data-y="36">
             <span class="flyer__tape" style="background:var(--sage)"></span>
             <h3 class="sale-title"><b>STICKER</b><span class="hand">sale</span></h3>
-            <p>Stickers are $2 each, and every one helps print another book. Look for our table on campus.</p>
-            <span class="price" data-cursor="spin!">$2</span>
+            <p>Stickers are a few dollars each, and every one helps print another book. Grab them in the shop or at our table on campus.</p>
+            <a class="price" href="shop.html" data-cursor="spin!" aria-label="Go to the sticker shop">shop</a>
           </article>
           <article class="flyer" data-rot="-1.5">
             <span class="flyer__tape" style="background:var(--blue)"></span>
             <h3 class="display" style="font-size:52px;line-height:.95">Support us!</h3>
-            <p>Lend us a hand by donating to our GoFundMe. It lets us print more books for elementary schools and libraries.</p>
+            <p>Give what you like, right here on the site. It goes into printing our books for elementary schools and libraries.</p>
             <a class="btn btn--blue" href="involved.html#donate">How to donate</a>
           </article>
         </div>
@@ -309,7 +326,7 @@
     <div class="footer__top">
       <div class="footer__note">
         <span class="hand">psst, the goose wants to hear from you.</span>
-        <p>DM us on Instagram, or find every form, application and donation link on our Linktree.</p>
+        <p>DM us on Instagram, or find every form and application on our Linktree. Donations happen <a href="involved.html#donate" style="text-decoration:underline;text-underline-offset:3px">right here on the site</a>.</p>
       </div>
       <div class="footer__cols">
         <div class="footer__col">
@@ -318,6 +335,7 @@
           <a href="shop.html">Sticker shop</a>
           <a href="index.html#mission">Our mission</a>
           <a href="team.html">Meet the team</a>
+          <a href="news.html">In the news</a>
           <a href="involved.html">Get involved</a>
         </div>
         <div class="footer__col">

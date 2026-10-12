@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gochi+Hand&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/merch.css" />
+  <link rel="stylesheet" href="assets/css/give.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -38,6 +40,7 @@
       <a class="nav__link" href="books.html">Books</a>
       <a class="nav__link" href="shop.html">Shop</a>
       <a class="nav__link" href="team.html">Team</a>
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="involved.html" aria-current="page">Get involved</a>
       <a class="btn btn--ink nav__cta" href="involved.html#donate">Support us</a>
     </nav>
@@ -51,7 +54,7 @@
       <button class="sound-btn draw-btn" type="button" aria-label="Pick up the pencil and draw on the page" aria-pressed="false" data-cursor="draw!">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.2-4.6L15.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z" fill="#fff"/><path d="M13.6 7l3.4 3.4"/><path d="M4 20l1.2-4.6 3.4 3.4z" fill="currentColor"/></svg>
       </button>
-      <button class="cart-btn" type="button" aria-label="Open your sticker bag" data-cursor="bag">
+      <button class="cart-btn" type="button" aria-label="Open your bag" data-cursor="bag">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 8h14l-1.4 11.2a1 1 0 0 1-1 .8H7.4a1 1 0 0 1-1-.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
         <span class="cart-btn__count">0</span>
       </button>
@@ -63,7 +66,8 @@
     <a href="books.html">Books</a>
     <a href="shop.html">Shop</a>
     <a href="team.html">Team</a>
-    <a href="involved.html">Get involved</a>
+    <a href="news.html">News</a>
+    <a href="involved.html" aria-current="page">Get involved</a>
     <a href="involved.html#donate">Support us</a>
     <div class="menu__toggles">
       <button class="sound-btn" type="button" aria-label="Toggle sound effects" aria-pressed="true" data-cursor="sound">
@@ -155,9 +159,9 @@
       <div class="wrap sale-grid">
         <div style="display:flex;flex-direction:column;gap:22px;max-width:520px">
           <h2 class="sale-title"><b style="font-size:clamp(56px,7vw,96px)">STICKER</b><span class="hand" style="font-size:clamp(48px,6vw,80px)">sale</span></h2>
-          <p class="lede" data-reveal>Our stickers are $2 each and every one helps print another book. We set up a table on campus a few times a year; watch our Instagram for the next one.</p>
+          <p class="lede" data-reveal>Our stickers are a few dollars each, and every one helps print another book. Grab them any time in the <a href="shop.html" style="text-decoration:underline;text-underline-offset:3px;font-weight:600">sticker shop</a>, or at our table on campus a few times a year (watch our Instagram for the next one).</p>
           <div style="display:flex;align-items:center;gap:20px" data-reveal>
-            <span class="price" data-cursor="spin!">$2</span>
+            <a class="price" href="shop.html" data-cursor="spin!" aria-label="Go to the sticker shop">shop</a>
             <span class="hand" style="font-size:26px;color:var(--blue)">peel a sticker off the sheet<br />and stick it anywhere!</span>
           </div>
         </div>
@@ -176,13 +180,23 @@
 
     <section class="section" id="donate" style="padding-top:0">
       <div class="wrap cta-band donate-band" data-reveal>
-        <div style="max-width:620px">
+        <div class="donate-band__copy">
           <span class="hand" style="font-size:30px;color:var(--yellow)">give us an extra hand</span>
           <h2 class="display h-md">Support us!</h2>
-          <p style="margin:14px 0 0;color:#e6ecff">Donating to our GoFundMe lets us print more books for elementary schools and libraries. The link lives on our Linktree.</p>
+          <p>Give what you like and it goes into printing our books for elementary schools and libraries, so kids can find them where they already read.</p>
+          <ul class="donate-band__list">
+            <li>Paid securely to the club through Stripe</li>
+            <li>Every dollar (after Stripe's card fee) prints books</li>
+            <li>We're a student club, so we can't issue tax receipts</li>
+          </ul>
+          <p>Want your money to go to a children's hospital instead? Download one of <a href="books.html#free">our books</a> and donate what you want for it.</p>
         </div>
-        <a class="btn btn--yellow donate-btn" href="https://linktr.ee/kids.health.shelf" target="_blank" rel="noopener" data-cursor="thank you!">Donate on GoFundMe
-          <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9 H15 M10 4 L15 9 L10 14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="give-box">
+          <span class="hand give-box__kicker">pick an amount</span>
+          <div data-give-box="shelf">
+            <p class="give-box__nojs">Donations need JavaScript switched on. You can also DM us on Instagram at <a href="https://www.instagram.com/kids.health.shelf/" target="_blank" rel="noopener">@kids.health.shelf</a>.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -206,6 +220,10 @@
             <div class="faq__a"><p>Donations and sticker sales help us print copies for elementary schools and libraries, so kids can find them where they already read.</p></div>
           </div>
           <div class="faq__item">
+            <button class="faq__q" type="button" aria-expanded="false">Where does money for a book PDF go?<span class="faq__icon" aria-hidden="true">+</span></button>
+            <div class="faq__a"><p>Reading our books is free. If you donate when you download one, that money comes to the club through Stripe, tagged so our VP Finance has a clear record, and every dollar of it (after Stripe's card fee) goes to Children's Health Foundation, which supports Children's Hospital at LHSC in London, Ontario. We send it each term. As a student club we can't issue tax receipts.</p></div>
+          </div>
+          <div class="faq__item">
             <button class="faq__q" type="button" aria-expanded="false">I'm a teacher or librarian. Can I get in touch?<span class="faq__icon" aria-hidden="true">+</span></button>
             <div class="faq__a"><p>Please do! Send us a DM on Instagram at @kids.health.shelf and our communications team will get back to you.</p></div>
           </div>
@@ -218,7 +236,7 @@
     <div class="footer__top">
       <div class="footer__note">
         <span class="hand">psst, the goose wants to hear from you.</span>
-        <p>DM us on Instagram, or find every form, application and donation link on our Linktree.</p>
+        <p>DM us on Instagram, or find every form and application on our Linktree. Donations happen <a href="involved.html#donate" style="text-decoration:underline;text-underline-offset:3px">right here on the site</a>.</p>
       </div>
       <div class="footer__cols">
         <div class="footer__col">
@@ -227,6 +245,7 @@
           <a href="shop.html">Sticker shop</a>
           <a href="index.html#mission">Our mission</a>
           <a href="team.html">Meet the team</a>
+          <a href="news.html">In the news</a>
           <a href="involved.html">Get involved</a>
         </div>
         <div class="footer__col">
@@ -262,6 +281,7 @@
   <script src="assets/js/site.js"></script>
   <script src="assets/js/draw.js"></script>
   <script src="assets/js/cart.js"></script>
+  <script src="assets/js/give.js"></script>
   <script src="assets/js/involved.js"></script>
 </body>
 </html>

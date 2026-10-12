@@ -1,0 +1,144 @@
+/* Donate what you want: the pop-up box (books' Download PDF), the inline box
+   (Get Involved → Support us), the books page's "where the money goes" band and
+   the thank-you note after Stripe. Pairs with assets/js/give.js. */
+
+/* ---------- the form, wherever it lives ---------- */
+.give__form { display: flex; flex-direction: column; gap: 16px; }
+.give__amounts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.give__chip { position: relative; cursor: pointer; }
+.give__chip input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.give__chip span {
+  display: inline-flex; align-items: center; height: 46px; padding: 0 18px;
+  border: 2.5px solid var(--ink); border-radius: var(--pill); background: var(--paper);
+  font-weight: 700; font-size: 18px; letter-spacing: var(--tracking-snug); white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.18s var(--ease-out), transform 0.18s var(--ease-out);
+}
+.give__chip:hover span { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.give__chip input:checked + span { background: var(--yellow); box-shadow: 3px 3px 0 var(--ink); }
+.give__chip input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 3px; }
+.give__chip--free span { font-size: 15px; background: var(--wash); }
+.give__chip--free input:checked + span { background: var(--sage); }
+
+.give__other {
+  display: flex; align-items: center; gap: 8px; height: 54px; padding: 0 16px;
+  border: 2.5px solid var(--ink); border-radius: var(--radius-md); background: var(--paper);
+}
+.give__other[hidden] { display: none; }
+.give__other:focus-within { box-shadow: 0 0 0 3px var(--blue); }
+.give__cur { font-weight: 800; font-size: 24px; }
+.give__other input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; font: inherit; font-weight: 700; font-size: 22px; color: var(--ink); }
+.give__cad { font-size: 12px; color: var(--dim); letter-spacing: 0.04em; text-align: right; }
+
+.give__where {
+  display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 14px 16px;
+  border: 2px dashed var(--ink); border-radius: var(--radius-md); background: var(--wash);
+  font-size: 15px; line-height: 1.45; color: var(--ink);
+}
+.give__where .kicker { font-size: 12px; }
+.give__where b { font-size: 18px; letter-spacing: var(--tracking-snug); }
+.give__where a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; text-decoration-color: var(--blue); }
+
+.give__go {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 60px; border-radius: var(--pill); background: var(--red); color: #fff; border: 2.5px solid var(--ink); box-shadow: 5px 5px 0 var(--ink);
+  font-weight: 800; font-size: 22px; letter-spacing: var(--tracking-snug);
+  transition: transform 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
+}
+.give__go svg { width: 20px; height: 20px; transition: transform 0.25s var(--ease-out); }
+.give__go:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--ink); }
+.give__go:hover svg { transform: translateX(4px); }
+.give__go:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.give__go.is-busy { opacity: 0.7; cursor: progress; }
+.give__msg { margin: 0; font-size: 15px; color: var(--ink); text-align: center; }
+/* stays in the accessibility tree while empty, so the live region announces new text */
+.give__msg:empty { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.give__msg a { font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; }
+.give__fine { margin: 0; text-align: center; font-family: var(--font-mono); font-size: 12px; letter-spacing: var(--tracking-open); color: var(--dim); text-transform: uppercase; }
+
+/* ---------- pop-up box ---------- */
+.give { position: fixed; inset: 0; z-index: 95; display: none; place-items: center; padding: 12px; }
+.give.is-open { display: grid; }
+.give__scrim { position: absolute; inset: 0; background: rgba(20, 22, 26, 0.55); }
+.give__panel {
+  position: relative; width: min(460px, 100%); max-height: calc(100dvh - 24px); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--paper); border: 2.5px solid var(--ink); border-radius: 24px; box-shadow: 8px 8px 0 var(--ink);
+}
+.give__head { display: flex; align-items: flex-start; gap: 12px; padding: 22px 24px 14px; border-bottom: 2px dashed var(--grid); }
+.give__kicker { display: block; font-size: 24px; line-height: 1; color: var(--blue); transform: rotate(-2deg); transform-origin: left; }
+.give__title { margin: 6px 0 0; font-weight: 800; font-style: italic; font-size: 28px; letter-spacing: var(--tracking-tight); line-height: 1.05; }
+.give__x { margin-left: auto; flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; }
+.give__x svg { width: 16px; height: 16px; }
+.give__body { padding: 18px 24px 22px; }
+/* confetti from the box flies over it (and over the open book) */
+html.give-open .confetti { z-index: 100; }
+
+/* ---------- inline box (Get Involved → Support us) ---------- */
+.give-box {
+  width: min(440px, 100%); padding: 24px; color: var(--ink);
+  background: var(--paper); border: 2.5px solid var(--ink); border-radius: 20px; box-shadow: 8px 8px 0 var(--yellow);
+  transform: rotate(1deg);
+}
+.give-box__kicker { display: block; margin: -4px 0 12px; font-size: 26px; line-height: 1; color: var(--blue); transform: rotate(-2deg); }
+.give-box__nojs { margin: 0; font-size: 16px; }
+.give-box__nojs a { font-weight: 700; text-decoration: underline; }
+.donate-band__copy { max-width: 560px; }
+.donate-band__copy p { margin: 14px 0 0; color: #e6ecff; }
+.donate-band__copy a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.donate-band__list { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; color: #fff; }
+.donate-band__list li { display: flex; gap: 10px; align-items: baseline; }
+.donate-band__list li::before { content: "✓"; font-family: var(--font-hand); color: var(--yellow); font-size: 22px; line-height: 1; }
+
+/* ---------- books page: reading is free ---------- */
+.free-band {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center;
+  padding: 36px 40px; border: 2.5px solid var(--ink); border-radius: 24px; background: var(--sage); box-shadow: 10px 10px 0 var(--ink);
+}
+.free-band__badge {
+  width: 132px; height: 132px; border-radius: 50%; background: var(--yellow); border: 2.5px solid var(--ink);
+  display: grid; place-items: center; text-align: center; transform: rotate(-10deg);
+  font-weight: 800; font-size: 22px; line-height: 0.95; letter-spacing: var(--tracking-tight);
+}
+.free-band__badge b { display: block; font-size: 40px; }
+.free-band h2 { margin: 0 0 10px; }
+.free-band p { margin: 0; max-width: 680px; }
+.free-band p + p { margin-top: 10px; }
+.free-band a:not(.btn) { font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; }
+.free-band .mono { font-size: 14px; color: var(--ink); opacity: 0.75; }
+.dl-link {
+  display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+  font-weight: 700; font-size: 16px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--blue);
+}
+.dl-link svg { width: 18px; height: 18px; }
+.highlight__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.reader__links { flex-wrap: wrap; justify-content: center; }
+
+/* ---------- thank-you note after Stripe ---------- */
+.give-thanks {
+  position: fixed; left: 50%; bottom: 20px; z-index: 80; translate: -50% 0;
+  display: flex; align-items: flex-start; gap: 14px; width: min(520px, calc(100vw - 32px)); padding: 16px 16px 18px;
+  background: var(--yellow); border: 2.5px solid var(--ink); border-radius: 22px; box-shadow: 6px 6px 0 var(--ink);
+}
+.give-thanks ~ .confetti { z-index: 100; }
+.give-thanks__goose { width: 62px; height: 72px; flex-shrink: 0; transform: rotate(-8deg); }
+.give-thanks__goose svg { width: 100%; height: 100%; }
+.give-thanks__copy { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.give-thanks__copy .hand { font-size: 34px; line-height: 1; color: var(--blue); }
+.give-thanks__copy p { margin: 0; font-size: 15px; line-height: 1.45; }
+.give-thanks__dl { align-self: flex-start; margin-top: 6px; padding: 10px 18px; font-size: 15px; box-shadow: 3px 3px 0 var(--ink); --btn-bg: var(--paper); }
+.give-thanks__x { margin-left: auto; flex-shrink: 0; padding: 4px 8px; font-size: 18px; }
+
+@media (max-width: 860px) {
+  .free-band { grid-template-columns: 1fr; padding: 28px 24px; gap: 18px; }
+  .free-band__badge { width: 104px; height: 104px; font-size: 18px; }
+  .free-band__badge b { font-size: 32px; }
+  .give-box { transform: none; }
+}
+@media (max-width: 640px) {
+  .give__head { padding: 18px 18px 12px; }
+  .give__body { padding: 16px 18px 18px; }
+  .give__title { font-size: 24px; }
+  .give__chip span { height: 44px; padding: 0 15px; font-size: 17px; }
+  .give__go { height: 56px; font-size: 20px; }
+  .give-box { padding: 18px; }
+  .give-thanks { bottom: 12px; }
+}

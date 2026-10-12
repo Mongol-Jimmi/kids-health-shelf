@@ -1,5 +1,5 @@
 /* Get Involved page: tickets that deal themselves out, a sticker sheet you can
-   peel and stick anywhere, a confetti donate button and an animated FAQ. */
+   peel and stick anywhere, a donate box (give.js) with a confetti button and an animated FAQ. */
 (function () {
   const gsap = window.gsap;
   const KHS = window.KHS;
@@ -77,11 +77,17 @@
     price.addEventListener("pointerenter", () => { gsap.to(price, { rotation: "+=360", duration: 0.9, ease: "back.out(1.4)" }); KHS.popSound(1.3); });
   }
 
-  /* ---- donate ---- */
-  const donate = document.querySelector(".donate-btn");
-  if (donate) {
-    donate.addEventListener("pointerenter", () => {
-      const r = donate.getBoundingClientRect();
+  /* ---- donate: the box itself comes from give.js; its button throws a little confetti ---- */
+  const band = document.querySelector("#donate");
+  if (band) {
+    let last = null;
+    band.addEventListener("pointerover", (e) => {
+      const go = e.target.closest(".give__go");
+      if (go === last) return;
+      last = go;
+      if (!go) return;
+      go.dataset.cursor = "thank you!";
+      const r = go.getBoundingClientRect();
       KHS.confetti(r.left + r.width / 2, r.top, 10, 60);
     });
   }

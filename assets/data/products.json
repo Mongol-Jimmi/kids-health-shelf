@@ -5,6 +5,11 @@
     "pickup": { "label": "Pick up on campus", "price": 0 },
     "mail": { "label": "Mail it (Canada)", "price": 200 }
   },
+  "funds": {
+    "chf": { "label": "Children's Health Foundation", "note": "Kids Health Shelf sends every dollar (after Stripe's card fee) to Children's Health Foundation each term. The club can't issue tax receipts." },
+    "shelf": { "label": "Printing the next books", "note": "Pays for printing Kids Health Shelf books for schools and libraries. The club can't issue tax receipts." }
+  },
+  "give": { "min": 100, "max": 100000, "presets": [500, 1000, 2500] },
   "products": [
     { "id": "goose", "name": "Honk the Goose", "price": 300, "art": "goose", "bg": "yellow", "spec": "3 in · glossy vinyl", "tags": ["critters"], "badge": "Bestseller" },
     { "id": "daisy", "name": "Daisy Days", "price": 300, "art": "daisy", "bg": "sky", "spec": "3 in · glossy vinyl", "tags": ["garden"] },
@@ -12,6 +17,9 @@
     { "id": "ladybug", "name": "Lucky Ladybug", "price": 300, "art": "ladybug", "bg": "pink", "spec": "3 in · glossy vinyl", "tags": ["critters"], "badge": "New" },
     { "id": "tree", "name": "Rambutan Tree", "price": 400, "art": "tree", "bg": "wash", "spec": "4 in · matte paper", "tags": ["books"], "badge": "From book 0001" },
     { "id": "apple", "name": "Apple a Day", "price": 300, "art": "apple", "bg": "yellow", "spec": "3 in · glossy vinyl", "tags": ["garden"] },
-    { "id": "pack", "name": "The Whole Shelf Pack", "price": 1500, "art": "pack", "bg": "blue", "spec": "all six stickers + a thank-you note", "tags": ["packs"], "pack": true }
+    { "id": "pack", "name": "The Whole Shelf Pack", "price": 1500, "art": "pack", "bg": "blue", "spec": "all six stickers + a thank-you note", "tags": ["packs"], "pack": true },
+    { "id": "tee", "name": "Honk Tee (sample)", "price": 2800, "art": "goose", "bg": "sky", "spec": "cotton tee · unisex fit", "tags": ["merch"], "badge": "Sample", "kind": "merch", "sizes": ["S", "M", "L", "XL"], "madeToOrder": "Printed when you order · ships in about 2 weeks", "draft": true },
+    { "id": "tote", "name": "Daisy Tote (sample)", "price": 2200, "art": "daisy", "bg": "sage", "spec": "canvas tote · 15 × 16 in", "tags": ["merch"], "badge": "Sample", "kind": "merch", "madeToOrder": "Printed when you order · ships in about 2 weeks", "draft": true },
+    { "id": "rambutan-hardcover", "name": "The Girl Under the Rambutan Tree, hardcover (sample)", "price": 2500, "art": "tree", "bg": "wash", "spec": "printed hardcover · 24 pages", "tags": ["books", "preorder"], "badge": "Sample", "kind": "preorder", "drop": { "closes": "2026-12-01", "ships": "January 2027", "limit": 100 }, "draft": true }
   ]
 }

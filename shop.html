@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sticker Shop — Kids Health Shelf</title>
-  <meta name="description" content="Buy Kids Health Shelf stickers with Apple Pay, Google Pay or a card. Every sticker helps print the next picture book from Western University students." />
+  <title>Shop — Kids Health Shelf</title>
+  <meta name="description" content="Kids Health Shelf stickers, made-to-order merch and limited book drops. Pay with Apple Pay, Google Pay or a card. Everything you buy helps print the next picture book from Western University students." />
   <meta name="theme-color" content="#FFE14D" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23FFE14D' stroke='%2314161A' stroke-width='6'/%3E%3Cpath d='M58 40 L74 44 L58 49 Z' fill='%23FFA23A'/%3E%3Ccircle cx='52' cy='40' r='4' fill='%2314161A'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gochi+Hand&family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/merch.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -38,6 +39,7 @@
       <a class="nav__link" href="books.html">Books</a>
       <a class="nav__link" href="shop.html" aria-current="page">Shop</a>
       <a class="nav__link" href="team.html">Team</a>
+      <a class="nav__link" href="news.html">News</a>
       <a class="nav__link" href="involved.html">Get involved</a>
       <a class="btn btn--ink nav__cta" href="involved.html#donate">Support us</a>
     </nav>
@@ -51,7 +53,7 @@
       <button class="sound-btn draw-btn" type="button" aria-label="Pick up the pencil and draw on the page" aria-pressed="false" data-cursor="draw!">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.2-4.6L15.8 4.8a2 2 0 0 1 2.8 0l.6.6a2 2 0 0 1 0 2.8L8.6 18.8z" fill="#fff"/><path d="M13.6 7l3.4 3.4"/><path d="M4 20l1.2-4.6 3.4 3.4z" fill="currentColor"/></svg>
       </button>
-      <button class="cart-btn" type="button" aria-label="Open your sticker bag" data-cursor="bag">
+      <button class="cart-btn" type="button" aria-label="Open your bag" data-cursor="bag">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 8h14l-1.4 11.2a1 1 0 0 1-1 .8H7.4a1 1 0 0 1-1-.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
         <span class="cart-btn__count">0</span>
       </button>
@@ -61,8 +63,9 @@
 
   <div class="menu" aria-label="Mobile menu">
     <a href="books.html">Books</a>
-    <a href="shop.html">Shop</a>
+    <a href="shop.html" aria-current="page">Shop</a>
     <a href="team.html">Team</a>
+    <a href="news.html">News</a>
     <a href="involved.html">Get involved</a>
     <a href="involved.html#donate">Support us</a>
     <div class="menu__toggles">
@@ -82,7 +85,7 @@
         <div>
           <span class="kicker" data-reveal>Stick them on everything</span>
           <h1 class="display h-xl title-red" data-split="chars">Sticker Shop!</h1>
-          <p class="lede" data-reveal>Every sticker you buy helps us print the next Kids Health Shelf book. Pay with Apple&nbsp;Pay, Google&nbsp;Pay or a card.</p>
+          <p class="lede" data-reveal>Stickers, made-to-order merch and limited drops of our books. Everything you buy helps us print the next Kids Health Shelf book. Pay with Apple&nbsp;Pay, Google&nbsp;Pay or a card.</p>
         </div>
         <div class="shop-note" data-pop>
           <span class="hand">Funds the next book!</span>
@@ -91,12 +94,12 @@
       </div>
     </section>
 
-    <section class="shop" aria-label="Stickers for sale">
+    <section class="shop" aria-label="Things for sale">
       <div class="wrap">
         <div class="thanks" role="status" tabindex="-1">
           <span class="kicker">Order placed</span>
-          <h2>Honk! Your stickers are on the way.</h2>
-          <p>Stripe has emailed you a receipt. We'll email you again when your stickers are ready to pick up (or in the mail).</p>
+          <h2>Honk! Your order is on its way.</h2>
+          <p>Stripe has emailed you a receipt. We'll email you again when your order is ready to pick up (or in the mail). Made-to-order merch and pre-orders follow on the dates in the shop.</p>
           <div class="thanks__ctas">
             <a class="btn btn--ink" href="shop.html">Keep browsing</a>
             <a class="btn" href="books.html">Read our books</a>
@@ -104,12 +107,14 @@
         </div>
 
         <div class="shop-bar">
-          <div class="filters" role="group" aria-label="Filter stickers">
-            <button class="filter" type="button" data-filter="all" aria-pressed="true">All stickers</button>
+          <div class="filters" role="group" aria-label="Filter the shop">
+            <button class="filter" type="button" data-filter="all" aria-pressed="true">Everything</button>
             <button class="filter" type="button" data-filter="critters" aria-pressed="false">Critters</button>
             <button class="filter" type="button" data-filter="garden" aria-pressed="false">Garden</button>
             <button class="filter" type="button" data-filter="books" aria-pressed="false">From the books</button>
             <button class="filter" type="button" data-filter="packs" aria-pressed="false">Packs</button>
+            <button class="filter" type="button" data-filter="merch" aria-pressed="false">Merch</button>
+            <button class="filter" type="button" data-filter="preorder" aria-pressed="false">Pre-order</button>
           </div>
           <span class="hand">psst… drag a sticker into your bag!</span>
         </div>
@@ -122,7 +127,7 @@
   </main>
 
   <div class="bagbar" aria-hidden="true">
-    <span class="bagbar__sum">Bag · 0 stickers</span>
+    <span class="bagbar__sum">Bag · 0 items</span>
     <button type="button" data-bag-open tabindex="-1">Check out →</button>
   </div>
 
@@ -130,7 +135,7 @@
     <div class="footer__top">
       <div class="footer__note">
         <span class="hand">psst, the goose wants to hear from you.</span>
-        <p>DM us on Instagram, or find every form, application and donation link on our Linktree.</p>
+        <p>DM us on Instagram, or find every form and application on our Linktree. Donations happen <a href="involved.html#donate" style="text-decoration:underline;text-underline-offset:3px">right here on the site</a>.</p>
       </div>
       <div class="footer__cols">
         <div class="footer__col">
@@ -139,6 +144,7 @@
           <a href="shop.html">Sticker shop</a>
           <a href="index.html#mission">Our mission</a>
           <a href="team.html">Meet the team</a>
+          <a href="news.html">In the news</a>
           <a href="involved.html">Get involved</a>
         </div>
         <div class="footer__col">

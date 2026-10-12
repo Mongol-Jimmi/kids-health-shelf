@@ -1,7 +1,8 @@
 /* Books page: books drop onto the shelf and spines lift on hover. Click a spine
    and the book slides off the shelf, turns to show its cover, swings open and
    becomes a flip-book of the real pages: drag or tap a page, use the arrow keys,
-   or scrub through. Like buttons burst into hearts. */
+   or scrub through. Like buttons burst into hearts. Reading is free; the PDF
+   download links carry data-give, so give.js asks "donate what you want?" first. */
 (function () {
   const gsap = window.gsap;
   const KHS = window.KHS;
@@ -355,7 +356,13 @@
     if (/^https?:/.test(book.cta[1])) { cta.target = "_blank"; cta.rel = "noopener"; } else { cta.removeAttribute("target"); cta.removeAttribute("rel"); }
     const pdf = field("pdf");
     pdf.hidden = !book.slug;
-    if (book.slug) { pdf.href = `assets/books/${book.slug}.pdf`; pdf.setAttribute("aria-label", `Download ${book.title} as a PDF`); }
+    // reading stays free; "Download PDF" opens the donate-what-you-want box (give.js), where $0 is fine
+    if (book.slug) {
+      pdf.href = `assets/books/${book.slug}.pdf`;
+      pdf.dataset.book = book.slug;
+      pdf.dataset.title = book.title;
+      pdf.setAttribute("aria-label", `Download ${book.title} as a PDF`);
+    }
     pages = book.html ? book.html.map((html) => ({ html })) : Array.from({ length: book.pages }, (_, i) => ({ src: pageSrc(book, i) }));
   }
 
@@ -542,9 +549,11 @@
     }, 120);
   });
 
-  // books.html?read=microville (the covers on the Team page) opens that book straight away
-  const wanted = new URLSearchParams(location.search).get("read");
-  if (BOOKS[wanted]) setTimeout(() => openBook(wanted, null), R ? 0 : 900);
+  // books.html?read=microville (the covers on the Team page, or a cancelled book gift,
+  // which sends the PDF slug) opens that book straight away
+  const asked = new URLSearchParams(location.search).get("read");
+  const wanted = Object.keys(BOOKS).find((k) => k === asked || (BOOKS[k].slug && BOOKS[k].slug === asked));
+  if (wanted) setTimeout(() => openBook(wanted, null), R ? 0 : 900);
 
   /* ---------------- likes ---------------- */
   gsap.utils.toArray(".like-btn").forEach((btn) => {
