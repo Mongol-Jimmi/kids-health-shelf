@@ -1,6 +1,26 @@
 {
   "articles": [
     {
+      "outlet": "Western Gazette",
+      "date": "2026-11-01",
+      "title": "USC hosts first clubs fair for non-USC-ratified clubs",
+      "url": "https://westerngazette.ca/news/usc-hosts-first-clubs-fair-for-non-usc-ratified-clubs/article_698eb17d-6f62-4045-b5dd-b07507fbf3da.html",
+      "byline": "Tia Chong, Senior News Editor",
+      "summary": "At the USC's first fair for clubs run under other Western bodies, our co-president Dilnazz Matharu talks about how much harder it used to be for a faculty club like ours to get noticed on campus.",
+      "read": "Read in the Gazette",
+      "tint": "sage"
+    },
+    {
+      "outlet": "Schulich Medicine & Dentistry",
+      "date": "2026-10-08",
+      "title": "Students bring diverse stories, health education to young readers",
+      "url": "https://www.schulich.uwo.ca/about/news-events-community/news/2026/students-bring-diverse-stories-health-education-to-young-readers.html",
+      "byline": "Houda Houbeish",
+      "summary": "How the club started, the four books so far (from The Girl Under the Rambutan Tree to MicroVille's microbiome characters and a new story about pre-game nerves), donations to Children's Hospital at LHSC and to kids in Guyana, and a book in the works with Dr. Jamaica Cass.",
+      "read": "Read on Schulich",
+      "tint": "yellow"
+    },
+    {
       "outlet": "CBC News",
       "date": "2025-07-06",
       "title": "These students are bringing diversity to children's literature, one book at a time",
@@ -20,7 +40,5 @@
       "tint": "pink"
     }
   ],
-  "upcoming": [
-    { "outlet": "Coming soon", "note": "More stories about the club are on the way." }
-  ]
+  "upcoming": []
 }
