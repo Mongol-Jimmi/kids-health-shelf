@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- The shop is switched off until there is real stock. Delete the next three lines to switch it back on
+       (and put the Shop links back in the nav, menu and footer of the other pages). -->
+  <meta name="robots" content="noindex" />
+  <meta http-equiv="refresh" content="0; url=index.html" />
+  <script>location.replace("index.html");</script>
   <title>Shop — Kids Health Shelf</title>
   <meta name="description" content="Kids Health Shelf stickers, made-to-order merch and limited book drops. Pay with Apple Pay, Google Pay or a card. Everything you buy helps print the next picture book from Western University students." />
   <meta name="theme-color" content="#FFE14D" />
@@ -33,7 +38,7 @@
   <header class="nav">
     <a class="logo" href="index.html" aria-label="Kids Health Shelf home">
       <span class="logo__badge" data-sticker="goose"></span>
-      <span class="logo__text"><span class="logo__name">Kids Health Shelf</span><span class="logo__sub">WESTERN UNIVERSITY</span></span>
+      <span class="logo__text"><span class="logo__name">Kids Health Shelf</span></span>
     </a>
     <nav class="nav__links" aria-label="Main">
       <a class="nav__link" href="books.html">Books</a>

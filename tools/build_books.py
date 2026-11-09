@@ -5,7 +5,7 @@
 
 For every book in BOOKS it writes
   assets/books/pages/<slug>/NN.webp   one image per PDF page (the flip-book reads these)
-  assets/books/spines/<slug>.webp     a spine made from the book's own cover art and fonts
+  assets/books/spines/<slug>.webp     a spine made from the book's own cover art and fonts (title only)
 
 The spine fonts are the ones embedded in each PDF, so the lettering matches the cover.
 Re-run after replacing a PDF, then update that book's `pages` count in assets/js/books.js.
@@ -75,16 +75,6 @@ def grain(img, amount=10, seed=1):
     n = rng.normal(0, amount, a.shape[:2])[..., None]
     a[..., :3] = np.clip(a[..., :3] + n, 0, 255)
     return Image.fromarray(a.astype(np.uint8), img.mode)
-
-
-def logo(cov, zoom, box_pt):
-    """Crop the round Kids Health Shelf badge from a cover (box in PDF points)."""
-    x0, y0, x1, y1 = [round(v * zoom) for v in box_pt]
-    c = cov.crop((x0, y0, x1, y1)).convert("RGBA")
-    m = Image.new("L", c.size, 0)
-    ImageDraw.Draw(m).ellipse((2, 2, c.width - 3, c.height - 3), fill=255)
-    c.putalpha(m)
-    return c
 
 
 def fit(img, w=None, h=None):
@@ -167,7 +157,6 @@ def spine_rambutan(slug, W):
     bg = grain(bg, 6)
 
     title = embedded_font(slug, "Lazydog", 140)
-    author = embedded_font(slug, "Gaegu", 110)
     yellow, shadow = (0xFD, 0xD0, 0x5B), (58, 36, 22)
     l1 = text_img("The Girl Under The", title, yellow, shadow=shadow, offset=(6, 6))
     l2 = text_img("Rambutan Tree", title, yellow, shadow=shadow, offset=(6, 6))
@@ -175,12 +164,9 @@ def spine_rambutan(slug, W):
     block = Image.new("RGBA", (max(l1.width, l2.width), l1.height + l2.height + 14), (0, 0, 0, 0))
     block.alpha_composite(l1, ((block.width - l1.width) // 2, 0))
     block.alpha_composite(l2, ((block.width - l2.width) // 2, l1.height + 14))
-    block = fit(block, w=H * 0.41, h=W * 0.8)
-    name = fit(text_img("Ranasinghe", author, (255, 255, 255), shadow=shadow, offset=(3, 3)), w=H * 0.13, h=W * 0.34)
-    run = strip([block, name], H * 0.59, W, round(H * 0.03))
+    block = fit(block, w=H * 0.6, h=W * 0.84)
+    run = strip([block], H * 0.64, W, 0)
     bg.alpha_composite(turn(run), (0, round(H * 0.155)))
-    badge = fit(logo(cov, z, (512, 44, 592, 124)), w=W * 0.68)
-    bg.alpha_composite(badge, (round((W - badge.width) / 2), round(H - badge.height - W * 0.16)))
     return bg
 
 
@@ -191,7 +177,7 @@ def spine_nobody(slug, W):
     counter = px(30, 735)
     bg = Image.new("RGBA", (W, H), px(30, 120))
     d = ImageDraw.Draw(bg)
-    band = H * 0.84
+    band = H * 0.93
     d.rectangle((0, band, W, H), fill=counter)
     d.rectangle((0, band - 6, W, band), fill=tuple(max(0, c - 30) for c in counter))
     bg = grain(bg, 9)
@@ -223,8 +209,6 @@ def spine_nobody(slug, W):
         gap *= s
     run = strip(parts, room, W, round(gap))
     bg.alpha_composite(turn(run), (0, round(H * 0.02)))
-    badge = fit(logo(cov, z, (478, 646, 566, 734)), w=W * 0.74)
-    bg.alpha_composite(badge, (round((W - badge.width) / 2), round(band + (H - band - badge.height) / 2)))
     return bg
 
 
@@ -237,17 +221,15 @@ def spine_microville(slug, W):
     inner = round(W * 0.09)
     d = ImageDraw.Draw(bg)
     d.rectangle((inner, inner, W - inner - 1, H - inner - 1), fill=sky)
-    d.polygon([(inner, H * 0.76), (W * 0.5, H * 0.72), (W - inner, H * 0.77), (W - inner, H - inner), (inner, H - inner)], fill=px(40, 500))
+    d.polygon([(inner, H * 0.86), (W * 0.5, H * 0.83), (W - inner, H * 0.87), (W - inner, H - inner), (inner, H - inner)], fill=px(40, 500))
     bg = grain(bg, 5)
 
     # the "Welcome to MICROVILLE" banner, keyed out of the sky behind it
     sk = np.array(sky, np.int16)
     banner = key_out(cov.crop((round(55 * z), round(100 * z), round(560 * z), round(225 * z))),
                      lambda a: np.abs(a - sk).sum(axis=2) > 46)
-    banner = turn(fit(banner, w=H * 0.68, h=W * 0.86))
-    bg.alpha_composite(banner, (round((W - banner.width) / 2), round(H * 0.035)))
-    badge = fit(logo(cov, z, (520, 10, 600, 90)), w=W * 0.62)
-    bg.alpha_composite(badge, (round((W - badge.width) / 2), round(H - badge.height - W * 0.22)))
+    banner = turn(fit(banner, w=H * 0.76, h=W * 0.86))
+    bg.alpha_composite(banner, (round((W - banner.width) / 2), round((H * 0.84 - banner.height) / 2)))
     return bg
 
 

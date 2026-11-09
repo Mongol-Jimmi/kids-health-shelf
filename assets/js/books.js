@@ -30,16 +30,15 @@
     },
     soon: {
       slug: "", pages: 0,
-      num: "KHS BOOK 0004", title: "This spot is saved", by: "by someone like you",
-      cta: ["See open roles", "involved.html"],
+      num: "KHS BOOK 0004", title: "This spot is saved", by: "for our next book",
+      cta: ["See it on Instagram", "https://www.instagram.com/kids.health.shelf/"],
       html: [
-        `<div class="cover cover--pink"><span class="cover__title">This spot is saved</span><span class="cover__by">by someone like you</span><span class="cover__art">${KHS.stickers.question}</span></div>`,
+        `<div class="cover cover--pink"><span class="cover__title">This spot is saved</span><span class="cover__by">for our next book</span><span class="cover__art">${KHS.stickers.question}</span></div>`,
         `<div class="leaf__art">${KHS.stickers.pencil}</div><span class="hand">a Kids Health Shelf book</span>`,
-        `<span class="kicker">KHS BOOK 0004</span><h4>Your story could go on this page.</h4>
-         <p>The next Kids Health Shelf book hasn't been written yet. We're looking for authors and illustrators on a rolling basis, and no experience is needed.</p>
-         <div class="book-card__facts"><div class="fact"><b>Looking for:</b><span>writers &amp; artists</span></div><div class="fact"><b>Experience:</b><span>not required</span></div></div>
-         <a class="btn btn--blue" href="involved.html">See open roles</a>`,
-        `<div class="cover cover--pink" style="justify-content:center;text-align:center"><span class="hand" style="color:var(--ink)">psst… book four needs an author</span></div>`
+        `<span class="kicker">KHS BOOK 0004</span><h4>Book four is on its way.</h4>
+         <p>Our team is writing and drawing the next Kids Health Shelf book right now. Follow us on Instagram to see it first.</p>
+         <a class="btn btn--blue" href="https://www.instagram.com/kids.health.shelf/" target="_blank" rel="noopener">See it on Instagram</a>`,
+        `<div class="cover cover--pink" style="justify-content:center;text-align:center"><span class="hand" style="color:var(--ink)">psst… book four is on its way</span></div>`
       ]
     }
   };
